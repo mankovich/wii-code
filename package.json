@@ -11,7 +11,12 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "y-codemirror": "^3.0.1",
+    "randomcolor": "^0.6.2",
+    "react-codemirror2": "^8.0.0",
+    "y-webrtc": "10.3.0",
+    "yjs": "13.6.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
