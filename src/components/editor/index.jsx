@@ -40,6 +40,14 @@ export function Editor(props) {
         );
         // Define a shared text type on the document
         const yText = ydoc.getText("codemirror");
+        console.log("string: ",yText.toString() );
+        console.log("JSON: ",yText.toJSON() );
+        console.log("Delta: ",yText.toDelta() );
+        yText.observe(() => {
+            console.log("string: ",yText.toString() );
+            console.log("JSON: ",yText.toJSON() );
+            console.log("Delta: ",yText.toDelta() );
+        })
 
         // Undomanager used for stacking the undo and redo operation for yjs
         const yUndoManager = new Y.UndoManager(yText);
@@ -53,11 +61,24 @@ export function Editor(props) {
           color: color,
         });
 
+        awareness.on('update', updates => {
+            // todo getting all users from the awareness, this is to show all users in the room views. 
+            const users = (Array.from(awareness.getStates().values())).map((user) => user.user);
+            // users.forEach((user) => console.log(user.name));
+            // todo: return users to a setState from the room component 
+          })
+
         // Binds the Codemirror editor to Yjs text type
         const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
           yUndoManager,
         });
-        EditorRef.setValue(code);
+        console.log("string: ",yText.toString() );
+        console.log("JSON: ",yText.toJSON() );
+        console.log("Delta: ",yText.toDelta() );
+
+
+        // todo set the default value.  pending removal and replaced with the new algorithm.
+        // EditorRef.setValue(code);
       } catch (err) {
         alert(err + " error in collaborating try refreshing or come back later !");
       }
@@ -95,8 +116,8 @@ export function Editor(props) {
       <CodeMirrorEditor
         onChange={(editor, data, value) => {
           setCode(value)
-          setCount(count + 1);
-          console.log(count);
+        //   setCount(count + 1);
+        //   console.log(count);
         }}
         autoScroll
         options={{
