@@ -16,11 +16,14 @@
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-top: 12px;
     text-align: center;
-    text-shadow: 1px 1px 2px black, 0 0 12px var(--five), 0 0 4px #cde305, 0 0 1px rgb(0, 255, 55);
+    text-shadow: 1px 1px 2px black, 0 0 12px var(--button), 0 0 4px var(--four), 0 0 1px rgb(219, 81, 212);
 }
 
 #render-btn {
     position: fixed;
     right: 15px;
     bottom: 10px;
+    color: black;
+    background-color: var(--button);
+    border: var(--button);
 }

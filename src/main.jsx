@@ -7,7 +7,7 @@ import App from "./App";
 import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
 import EditorPage from './pages/EditorPage'
-import ProjectsPage from './pages/ProfilePage'
+import ProfilePage from './pages/ProfilePage'
 import CollabSignInPage from './pages/CollabSignInPage'
 
 // Define the accessible routes, and which components respond to which URL
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
           element: <HomePage />,
         },
         {
-          path: 'projects/:id',
-          element: <ProjectsPage />,
+          path: 'profile',
+          element: <ProfilePage />,
         },
         {
           path: 'editor/:roomId',
