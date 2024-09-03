@@ -6,8 +6,9 @@ import './style.css'
 
 function EditorsList () {
 
+    console.log('list of active editors')
     return (
-        console.log('list of active editors')
+        <button>list of active editors</button>
     )
 }
 

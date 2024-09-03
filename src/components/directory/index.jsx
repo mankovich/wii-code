@@ -5,9 +5,9 @@ import Modal from 'react-bootstrap/Modal'
 import './style.css'
 
 function Directory () {
-
+console.log('directory of files')
     return (
-        console.log('directory of files')
+        <Button>directory of files</Button>
     )
 }
 
