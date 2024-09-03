@@ -4,11 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'
 import './style.css'
 
-function Editor () {
+function AddFile () {
 
     return (
-        console.log('where the magic happens')
+        console.log('upload a file')
     )
 }
 
-export default Editor;
+export default AddFile;
