@@ -3,9 +3,9 @@ import { useState, useEffect, useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import AddFile from '../components/addFile/index.jsx'
-import Directory from '../components/directory/index.js'
-import EditorsList from '../components/editorsList/index.js'
-import Editor from '../components/editor/index.js'
+import Directory from '../components/directory/index.jsx'
+import EditorsList from '../components/editorsList/index.jsx'
+import Editor from '../components/editor/index.jsx'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';

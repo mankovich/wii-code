@@ -17,7 +17,7 @@ function NewProjectModal() {
   
     return (
       <>
-        <Button variant="primary" size="sm" onClick={handleShow}>
+        <Button variant="primary" size="sm" onClick={handleShow} id="new-project-btn">
           +Add Project
         </Button>
   

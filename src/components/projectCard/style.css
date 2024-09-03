@@ -1,0 +1,29 @@
+#project-card {
+    color: var(--four);
+    background-color: var(--three);
+    border: solid 1px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px black, 1px 1px 4px var(--two);
+}
+
+#project-name {
+    border-bottom: solid 1px;
+}
+
+#projects-title {
+    color: var(--four);
+    text-shadow: 1px 1px 3px black, 0px 0px 3px var(--four);
+    padding-top: 10px;
+    text-align: center;
+}
+
+#room-input {
+    margin-top: 15px;
+}
+
+#go-button {
+    background-color: var(--button);
+    color: white;
+    border-color:var(--button);
+    margin-top: 15px;
+}

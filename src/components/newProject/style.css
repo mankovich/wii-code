@@ -21,3 +21,9 @@
 #new-project-modal-title {
     font-size: 22px;
 }
+
+#new-project-btn {
+    background-color: var(--button);
+    border: var(--button);
+    color: black;
+}
