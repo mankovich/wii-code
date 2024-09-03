@@ -23,7 +23,7 @@
 
 #go-button {
     background-color: var(--button);
-    color: white;
+    color: black;
     border-color:var(--button);
     margin-top: 15px;
 }

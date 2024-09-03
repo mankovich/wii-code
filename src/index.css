@@ -2,13 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    --one: rgb(30,30,27);
+    --one: rgb(22,22,20);
     --two: #d0d2f2;
     --three: rgb(15, 15, 13);
-    --four: rgb(0,230,0);
+    --four:  #d0d2f2;
     --five: #e1e305;
     --six: rgb(45, 45, 40);
-    --button: rgb(25, 16, 145);
+    --button: rgb(230, 139, 253);
 }
 
 body {
