@@ -1,4 +1,4 @@
-export function editorsList(props) {
+export default function editorsList(props) {
     return (
       <>
         <h3>Users in the room</h3>
