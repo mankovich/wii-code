@@ -4,11 +4,11 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'
 import './style.css'
 
-function Editor () {
+function Directory () {
 
     return (
-        console.log('where the magic happens')
+        console.log('directory of files')
     )
 }
 
-export default Editor;
+export default Directory;
