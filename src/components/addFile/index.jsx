@@ -6,8 +6,9 @@ import './style.css'
 
 function AddFile () {
 
+    console.log('upload a file')
     return (
-        console.log('upload a file')
+            <Button>upload a file</Button>
     )
 }
 
