@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal'
 import './style.css'
 
-function EditorsList () {
-
-    console.log('list of active editors')
-    return (
-        <button>list of active editors</button>
-    )
+function EditorsList (props) {
+  return (
+    <div className="editors-list">
+      <h5 style={{color:"white"}}>In room users</h5>
+      {props.users.map((user) => (
+        <p key={user.name} style={{color : user.color}}>
+          {`${user.name}`}
+        </p>
+      ))}
+    </div>
+  )
 }
 
 export default EditorsList;

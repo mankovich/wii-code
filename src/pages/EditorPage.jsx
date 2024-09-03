@@ -24,6 +24,7 @@ import Stack from 'react-bootstrap/Stack'
 // projectName = roomName
 // ProjectID
 // room password
+// username from token?
 function EditorPage(props) {
     console.log('editorPage prop: ', props ?? 'no props')
     const [EditorRef, setEditorRef] = useState(null);
@@ -71,11 +72,11 @@ function EditorPage(props) {
               color: color,
             });
     
-            awareness.on('update', updates => {
-                // todo getting all users from the awareness, this is to show all users in the room views. 
+            // getting all users from the awareness, this is to show all users in the room views. 
+            awareness.on('update', () => {
                 const users = (Array.from(awareness.getStates().values())).map((user) => user.user);
-                // users.forEach((user) => console.log(user.name));
-                // todo: return users to a setState from the room component 
+                setInRoomUsers(users);
+                console.log(inRoomUsers);
               })
     
             // Binds the Codemirror editor to Yjs text type
@@ -108,7 +109,7 @@ function EditorPage(props) {
                         <Stack>
                             <AddFile />
                             <Directory />
-                            <EditorsList />
+                            <EditorsList users= {inRoomUsers} />
                         </Stack>
                     </Col>
                     <Col xs={10}>
