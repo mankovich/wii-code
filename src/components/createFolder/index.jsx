@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
 function CreateFolder() {
@@ -19,7 +20,7 @@ function CreateFolder() {
     return (
         <>
             <Button variant="primary" size="sm" onClick={handleShow} id="create-folder-btn">
-                +Folder
+                +<FontAwesomeIcon icon={faFolder} role="img" aria-label="create folder" title="create folder" />
             </Button>
 
             <Modal

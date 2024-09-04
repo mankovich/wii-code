@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCode } from '@fortawesome/free-solid-svg-icons'
 // import Button from 'react-bootstrap/Button';
 import './style.css'
 
@@ -18,7 +20,7 @@ function Header() {
                 <Row className="" id="app-header">
                     <Col lg={9} md={8} sm={8} xs={7}>
                         <h1 id="app-title">
-                            WiiCode
+                           WiiCode
                         </h1>
                     </Col>
                     <Col lg="auto" md="auto" sm={2} xs={3}>

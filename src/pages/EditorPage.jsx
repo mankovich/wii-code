@@ -108,7 +108,7 @@ function EditorPage(props) {
       <Container fluid id="editor-page-container">
         <Row>
           <Col xs={5} sm={4} md={3} xl={2} id="ed-left-panel" className="position-fixed top-55 start-0">
-            <Stack gap={2}>
+            <Stack gap={3}>
               <Stack direction="horizontal" gap={1}>
                 <div >
                   <CreateFile />
