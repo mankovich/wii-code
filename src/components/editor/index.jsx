@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
 import './style.css'
+import './monokai.css'
 
 function Editor (props) {
-console.log('where the magic happens');
 
-const [code, setCode] = useState("");
+// const [code, setCode] = useState("");
 
 // const handleEditorDidMount = (editor) => {
 //     setEditorRef(editor);
@@ -23,11 +23,11 @@ const [code, setCode] = useState("");
       }}
     >
       <CodeMirrorEditor
-        onChange={(editor, data, value) => {
-          setCode(value)
-        //   setCount(count + 1);
-        //   console.log(count);
-        }}
+        // onChange={(editor, data, value) => {
+        //   setCode(value)
+        // //   setCount(count + 1);
+        // //   console.log(count);
+        // }}
         autoScroll
         options={{
           theme: "monokai",
@@ -47,8 +47,6 @@ const [code, setCode] = useState("");
         editorDidMount={(editor) => {
           props.setEditorRef(editor);
           editor.setSize("100dvw", "100%");
-          // todo: only the first person open this doc will result in preloading the file
-        //   setCode(props.preload);
         }}
       />
     </div>
