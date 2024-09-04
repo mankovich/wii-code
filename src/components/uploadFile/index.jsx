@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'
 import Stack from 'react-bootstrap/Stack'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
 function UploadFile() {
@@ -19,7 +21,7 @@ function UploadFile() {
     return (
         <>
             <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn">
-                Upload
+                <FontAwesomeIcon icon={faUpload} role="img" aria-label="upload file" title="upload file"/>
             </Button>
 
             <Modal

@@ -8,5 +8,5 @@
 #dir-heading {
     padding-left: 10px;
     padding-top: 5px;
-    border-bottom: solid var(--button)
+    border-bottom: solid var(--button) 1px;
 }
