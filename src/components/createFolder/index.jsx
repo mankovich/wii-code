@@ -37,7 +37,6 @@ function CreateFolder() {
                 <Modal.Body id="modal-body">
                     <Form id="create-folder-form">
                         <Form.Group className="mb-3" controlId="formCreateFolder">
-                            <Form.Label>Name new folder</Form.Label>
                             <Form.Control type="text" placeholder="folder name"></Form.Control>
                         </Form.Group>
                     </Form>

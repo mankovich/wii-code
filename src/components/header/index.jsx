@@ -23,7 +23,7 @@ function Header() {
                     </Col>
                     <Col lg="auto" md="auto" sm={2} xs={3}>
                         <div id="header-comp1">
-                            <p>Project 1</p>
+                            <p>Project Name/username</p>
                             {/* <p>insert</p> */}
                         </div>
                     </Col>

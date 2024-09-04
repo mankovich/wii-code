@@ -56,35 +56,35 @@ function EditorPage(props) {
         // Define a shared text type on the document
         const yText = ydoc.getText("codemirror");
 
-            yText.observe(() => {
-                console.log("string: ",yText.toString() );
-                console.log("JSON: ",yText.toJSON() );
-                console.log("Delta: ",yText.toDelta() );
-            })
-    
-            // Undomanager used for stacking the undo and redo operation for yjs
-            const yUndoManager = new Y.UndoManager(yText);
-    
-            const awareness = provider.awareness;
-    
-            // Awareness protocol is used to propagate your information (cursor position , name , etc)
-            const color = RandomColor();
-            awareness.setLocalStateField("user", {
-              name: props.username || "user"+color,
-              color: color,
-            });
-    
-            // getting all users from the awareness, this is to show all users in the room views. 
-            awareness.on('update', () => {
-                const users = (Array.from(awareness.getStates().values())).map((user) => user.user);
-                setInRoomUsers(users);
-                console.log(inRoomUsers);
-              })
-    
-            // Binds the Codemirror editor to Yjs text type
-            const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
-              yUndoManager,
-            });
+        yText.observe(() => {
+          console.log("string: ", yText.toString());
+          console.log("JSON: ", yText.toJSON());
+          console.log("Delta: ", yText.toDelta());
+        })
+
+        // Undomanager used for stacking the undo and redo operation for yjs
+        const yUndoManager = new Y.UndoManager(yText);
+
+        const awareness = provider.awareness;
+
+        // Awareness protocol is used to propagate your information (cursor position , name , etc)
+        const color = RandomColor();
+        awareness.setLocalStateField("user", {
+          name: props.username || "user" + color,
+          color: color,
+        });
+
+        // getting all users from the awareness, this is to show all users in the room views. 
+        awareness.on('update', () => {
+          const users = (Array.from(awareness.getStates().values())).map((user) => user.user);
+          setInRoomUsers(users);
+          console.log(inRoomUsers);
+        })
+
+        // Binds the Codemirror editor to Yjs text type
+        const getBinding = new CodemirrorBinding(yText, EditorRef, awareness, {
+          yUndoManager,
+        });
 
 
 
@@ -105,11 +105,11 @@ function EditorPage(props) {
 
   return (
     <>
-      <Container fluid>
+      <Container fluid id="editor-page-container">
         <Row>
-          <Col xs={3}>
-            <Stack gap={1}>
-              <Stack direction="horizontal" gap={2}>
+          <Col xs={5} sm={4} md={3} xl={2} id="ed-left-panel" className="position-fixed top-55 start-0">
+            <Stack gap={2}>
+              <Stack direction="horizontal" gap={1}>
                 <div >
                   <CreateFile />
                 </div>
@@ -121,11 +121,12 @@ function EditorPage(props) {
                 </div>
               </Stack>
               <Directory />
-              <EditorsList users= {inRoomUsers} />
+              <EditorsList users={inRoomUsers} />
             </Stack>
           </Col>
-          <Col xs={9}>
+          <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
             <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
+      
           </Col>
         </Row>
       </Container>

@@ -1,0 +1,12 @@
+#dir-div {
+    color: var(--two);
+    border: double var(--button) 4px;
+    background-color: var(--three);
+    min-height: 250px;
+}
+
+#dir-heading {
+    padding-left: 10px;
+    padding-top: 5px;
+    border-bottom: solid var(--button)
+}

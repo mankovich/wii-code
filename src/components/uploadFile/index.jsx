@@ -19,7 +19,7 @@ function UploadFile() {
     return (
         <>
             <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn">
-                Upload file
+                Upload
             </Button>
 
             <Modal

@@ -37,7 +37,6 @@ function CreateFile() {
                 <Modal.Body id="modal-body">
                     <Form id="create-file-form">
                         <Form.Group className="mb-3" controlId="formCreateFile">
-                            <Form.Label>Name new file</Form.Label>
                             <Form.Control type="text" placeholder="example.js"></Form.Control>
                         </Form.Group>
                     </Form>

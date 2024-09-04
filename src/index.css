@@ -27,3 +27,16 @@ body {
     padding-top: 100px;
     text-align: center;
 }
+
+#editor-page-container {
+    padding-top: 10px;
+}
+
+#file-dir-div {
+    width: 100%;   
+}
+
+/* #ed-left-panel {
+    position:
+} */
+
