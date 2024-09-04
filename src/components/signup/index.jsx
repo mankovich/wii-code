@@ -32,14 +32,38 @@ function SignupForm() {
       const handleSignup = (e) => {
         e.preventDefault();
         const formErrors = validateForm();
-    
         if (Object.keys(formErrors).length === 0) {
-          console.log('Form submitted successfully', { userName, email, password });
-          //add logic for signup with fetch to server side 
+          fetch('http://localhost:3001/api/user/signup', { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify({
+              userName,
+              email,
+              password,
+            }), 
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+          })
+          .then((data) => {
+            console.log('Success:', data);
+          
+          })
+          .catch((error) => {
+            console.error('Fetch Error:', error.message);
+            alert(`An error occurred: ${error.message}`); 
+          });
+
         } else {
-          setErrors(formErrors);
+          setErrors(formErrors); 
         }
       };
+      
       return (
         <>
           <Form className="signup-form" onSubmit={handleSignup}>
