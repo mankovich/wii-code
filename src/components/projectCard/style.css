@@ -8,22 +8,28 @@
 
 #project-name {
     border-bottom: solid 1px;
+    padding-top: 10px;
 }
 
 #projects-title {
     color: var(--four);
     text-shadow: 1px 1px 3px black, 0px 0px 3px var(--four);
     padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
 }
 
 #room-input {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 #go-button {
     background-color: var(--button);
     color: black;
     border-color:var(--button);
-    margin-top: 15px;
+    margin-top: 20px;
+}
+
+.card-padding {
+    padding-left: 15px;
 }

@@ -13,17 +13,17 @@ function RoomPasscodeInput() {
 
     return (
         <>
-            <Form id="room-passcode-form">
-                <Form.Group className="mb-3" controlId="formRoomPasscode">
+            <Form id="room-passcode-form" onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
                     <FloatingLabel
                         controlId="floatingPasscode"
                         label="room passcode"
                         className="mb-3"
                     >
-                        <Form.Control type="text" placeholder="passcode" autoFocus />
+                        <Form.Control type="text" autoFocus />
                     </FloatingLabel>
                 </Form.Group>
-                <Button variant="primary" size="sm" type="submit">Enter room</Button>
+                <Button variant="primary" size="sm" type="submit" id="enter-rm-btn">Enter room</Button>
             </Form>
         </>
     )

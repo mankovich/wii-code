@@ -1,0 +1,5 @@
+#create-file-btn {
+    color: black;
+    background-color: var(--button);
+    border-color: var(--button);
+}
