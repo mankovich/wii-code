@@ -9,6 +9,7 @@ import '../index.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Stack from 'react-bootstrap/Stack'
 
 function ProfilePage() {
     const [state, setState] = useState('');
@@ -17,16 +18,11 @@ function ProfilePage() {
         <>
             <div id="profile-page-container">
                 <Container>
-                    <Row>
-                        <Col>
-                            <h2>My Projects</h2>
-                        </Col>
-                        <Col>
-                            <NewProjectModal />
-                        </Col>
-                    </Row>
+                    
+                        <h2 id="projects-title">My Projects</h2>
+                        <ProjectCard />
+                    
                 </Container>
-                <ProjectCard />
             </div>
         </>
     )

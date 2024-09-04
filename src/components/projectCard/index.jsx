@@ -2,7 +2,9 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form'
 import './style.css'
 
 function ProjectCard() {
@@ -12,38 +14,30 @@ function ProjectCard() {
 
     return (
         <>
-            <Container>
-                <Row>
-                    <Col>
-                        <p>Project Name</p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={3}>
-                        <ul>
-                            <li>index.html</li>
-                            <li>style.css</li>
-                            <li>index.js</li>
-                        </ul>
-                    </Col>
-                    <Col xs={9}>
-                        <Form id="new-room-form">
-                            <Form.Group className="mb-3" controlId="formNewRoom">
-                                <FloatingLabel
-                                    controlId="floatingRoomPasscode"
-                                    label="New Room"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="create passcode" autoFocus />
-                                </FloatingLabel>
-                            </Form.Group>
-                            <Button variant="primary" size="sm" type='submit'>
-                                Create Room
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
+            <div id="project-card">
+                <Container>
+                    <Row>
+                        <Col >
+                            <h4 id="project-name">Project Name</h4>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={6} className="card-padding">
+                            <ul>
+                                <li>index.html</li>
+                                <li>style.css</li>
+                                <li>index.js</li>
+                            </ul>
+                        </Col>
+                        <Col xs={6}>
+                            <Stack direction='horizontal' gap={2}>
+                                <Form.Control className="me-auto" placeholder="Enter room passcode" id="room-input" />
+                                <Button variant="primary" size="small" id="go-button">Enter</Button>
+                            </Stack>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         </>
     )
 }

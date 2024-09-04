@@ -3,12 +3,13 @@ import { useState, useEffect, useRef} from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { CodemirrorBinding } from "y-codemirror";
-import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import RandomColor from "randomcolor";
 
-import AddFile from '../components/addFile/index.jsx'
+import CreateFile from '../components/createFile/index.jsx'
+import CreateFolder from '../components/createFolder/index.jsx'
+import UploadFile from '../components/uploadFile/index.jsx'
 import Directory from '../components/directory/index.jsx'
 import EditorsList from '../components/editorsList/index.jsx'
 import Editor from '../components/editor/index.jsx'
@@ -16,7 +17,6 @@ import Editor from '../components/editor/index.jsx'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack'
 // import './style.css'
 
@@ -158,7 +158,7 @@ function EditorPage(props) {
             
             // Binds the Codemirror editor to Yjs text type
             console.log(ydoc.current);
-            editorBinding.current = new CodemirrorBinding(yMapRef.current.get("A"), EditorRef, awareness.current, {undoManager.current});
+            editorBinding.current = new CodemirrorBinding(yMapRef.current.get("A"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
 
           } catch (err) {
             alert(err + " error in collaborating try refreshing or come back later !");
@@ -179,28 +179,42 @@ function EditorPage(props) {
       editorBinding.current.destroy();
       // create new binding
       console.log("new binding ", currentFile);
-      editorBinding.current = new CodemirrorBinding(yMapRef.current.get(currentFile), EditorRef, awareness.current, {undoManager.current});
+      editorBinding.current = new CodemirrorBinding(yMapRef.current.get(currentFile), EditorRef, awareness.current, {yUndoManager: undoManager.current});
       }
     }, [currentFile]);
  
     return (
         <>
-            <Container>
-                <Row>
-                    <Col xs={2}>
-                        <Stack>
-                            <AddFile />
-                            <Directory setCurrentFile={setCurrentFile}/>
-                            <EditorsList users={inRoomUsers} />
-                        </Stack>
-                    </Col>
-                    <Col xs={10}>
-                        <Editor editorRef={EditorRef} setEditorRef={setEditorRef}/>
-                    </Col>
-                </Row>
-            </Container>
+    <>
+      <Container fluid id="editor-page-container">
+        <Row>
+          <Col xs={5} sm={4} md={3} xl={2} id="ed-left-panel" className="position-fixed top-55 start-0">
+            <Stack gap={3}>
+              <Stack direction="horizontal" gap={1}>
+                <div >
+                  <CreateFile />
+                </div>
+                <div className="ms-auto" >
+                  <CreateFolder />
+                </div>
+                <div className="ms-auto" >
+                  <UploadFile />
+                </div>
+              </Stack>
+              <Directory setCurrentFile={setCurrentFile} />
+              <EditorsList users={inRoomUsers} />
+            </Stack>
+          </Col>
+          <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
+            <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
+      
+          </Col>
+        </Row>
+      </Container>
+    </>
         </>
     )
+
 }
 
 export default EditorPage;

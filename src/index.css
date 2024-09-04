@@ -2,12 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    --one: rgb(30,30,27);
+    --one: rgb(22,22,20);
     --two: #d0d2f2;
     --three: rgb(15, 15, 13);
-    --four: rgb(204, 0, 255);
+    --four:  #d0d2f2;
     --five: #e1e305;
-    --six: #999999;
+    --six: rgb(45, 45, 40);
+    --button: rgb(230, 139, 253);
+    --neon: rgb(245, 0, 233);
 }
 
 body {
@@ -20,3 +22,22 @@ body {
     min-height: 100vh;
     padding-top: 55px;
 }
+
+#error-page {
+    color: var(--two);
+    padding-top: 100px;
+    text-align: center;
+}
+
+#editor-page-container {
+    padding-top: 10px;
+}
+
+#file-dir-div {
+    width: 100%;   
+}
+
+/* #ed-left-panel {
+    position:
+} */
+

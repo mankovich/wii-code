@@ -9,9 +9,15 @@ function Directory (props) {
 
   return (
     <>
-      <h5 style={{color:"white"}}>File directory</h5>
-      <p style={{color:"white"}} onClick={() => setFile("A")}>File A</p>
-      <p style={{color:"white"}} onClick={() => setFile("B")}>File B</p>
+                <div id="dir-div">
+                <h5 id="dir-heading">File Directory</h5>
+                <ul>
+                    <li style={{color:"white"}} onClick={() => setFile("A")}>File A</li>
+                    <li style={{color:"white"}} onClick={() => setFile("B")}>File B</li>
+                    <li>file</li>
+                    <li>file</li>
+                </ul>
+                </div>
     </>
   )
 }

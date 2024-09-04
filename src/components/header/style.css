@@ -1,5 +1,5 @@
 #app-header {
-    width: 100%;
+    width: 100vw;
     height: 55px;
     border-bottom: solid black 2px;
     background-color: var(--three);
@@ -8,6 +8,7 @@
     top: 0px;
     margin: 0px;
     padding-right: 20px;
+    z-index: 10;
 }
 
 #app-title {
@@ -15,17 +16,26 @@
     font-size: 32px;
     font-weight: 600;
     font-family:'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 2px black, 0 0 18px var(--five), 0 0 4px #cde305, 0 0 1px rgb(0, 255, 55);
+    text-shadow: 1px 1px 2px black, 0 0 18px var(--button), 0 0 4px var(--four), 0 0 1px rgb(255, 0, 242);
     padding-top: 12px;
+    padding-left: 10px;
 }
 
 #header-comp1, 
 #header-comp2 {
-    padding-top: 20px;
     color: var(--four);
     font-size: 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+#header-comp1 {
+    padding-top: 20px;
+}
+
+#header-comp2 {
+    position: fixed;
+    right: 15px;
+    top: 15px;
 }
  
 
