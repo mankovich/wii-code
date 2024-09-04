@@ -33,7 +33,7 @@ function NewProjectModal() {
                 Create new project
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body id="modal-body">
             <Form id="new-project-form">
                 <Form.Group className="mb-3" controlId="formNewProject">
                     <FloatingLabel
@@ -46,11 +46,11 @@ function NewProjectModal() {
                 </Form.Group>
             </Form>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer id="modal-footer">
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" onClick={handleNewProj}>
+            <Button variant="primary" onClick={handleNewProj} id="create-btn">
               Create project
             </Button>
           </Modal.Footer>

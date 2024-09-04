@@ -21,3 +21,9 @@ body {
     min-height: 100vh;
     padding-top: 55px;
 }
+
+#error-page {
+    color: var(--two);
+    padding-top: 100px;
+    text-align: center;
+}

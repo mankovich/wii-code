@@ -8,6 +8,24 @@
     box-shadow: 1px 1px 2px black, 2px 2px 15px var(--two), 3px 3px 10px rgb(204, 0, 255), 0 0 2px rgb(204, 0, 255) inset;
 }
 
+.modal-header {
+    background-color: var(--two);
+}
+
+#modal-body {
+    background-color: var(--two);
+}
+
+#modal-footer {
+    background-color: var(--two);
+}
+
+#create-btn {
+    color: black;
+    background-color: var(--button);
+    border-color: black;
+}
+
 #new-project-form {
     /* margin-top: 50px; */
     /* border: solid black 1px; */
@@ -24,6 +42,6 @@
 
 #new-project-btn {
     background-color: var(--button);
-    border: var(--button);
+    border-color: var(--button);
     color: black;
 }
