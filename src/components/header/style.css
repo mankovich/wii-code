@@ -8,6 +8,7 @@
     top: 0px;
     margin: 0px;
     padding-right: 20px;
+    z-index: 10;
 }
 
 #app-title {
@@ -17,6 +18,7 @@
     font-family:'Courier New', Courier, monospace;
     text-shadow: 1px 1px 2px black, 0 0 18px var(--button), 0 0 4px var(--four), 0 0 1px rgb(255, 0, 242);
     padding-top: 12px;
+    padding-left: 10px;
 }
 
 #header-comp1, 

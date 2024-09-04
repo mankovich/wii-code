@@ -17,12 +17,12 @@ function ProjectCard() {
             <div id="project-card">
                 <Container>
                     <Row>
-                        <Col>
+                        <Col >
                             <h4 id="project-name">Project Name</h4>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={6}>
+                        <Col xs={6} className="card-padding">
                             <ul>
                                 <li>index.html</li>
                                 <li>style.css</li>
@@ -32,7 +32,7 @@ function ProjectCard() {
                         <Col xs={6}>
                             <Stack direction='horizontal' gap={2}>
                                 <Form.Control className="me-auto" placeholder="Enter room passcode" id="room-input" />
-                                <Button variant="primary" size="small" id="go-button">Go</Button>
+                                <Button variant="primary" size="small" id="go-button">Enter</Button>
                             </Stack>
                         </Col>
                     </Row>

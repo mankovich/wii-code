@@ -3,13 +3,21 @@ import { useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import './style.css';
+
 import NewProjectModal from '../newProject/index.jsx';
 import { UserContext } from '../../contexts/userContext.jsx'; 
+
+import Stack from 'react-bootstrap/Stack'
+// import Button from 'react-bootstrap/Button';
+import './style.css'
+
+import NewProjectModal from '../newProject/index.jsx'
+
 
 function Header() {
   const location = useLocation();
   const { username } = useContext(UserContext); 
+
 
   const isProfilePage = location.pathname === '/profile';
 

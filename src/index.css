@@ -9,6 +9,7 @@
     --five: #e1e305;
     --six: rgb(45, 45, 40);
     --button: rgb(230, 139, 253);
+    --neon: rgb(245, 0, 233);
 }
 
 body {
@@ -21,3 +22,22 @@ body {
     min-height: 100vh;
     padding-top: 55px;
 }
+
+#error-page {
+    color: var(--two);
+    padding-top: 100px;
+    text-align: center;
+}
+
+#editor-page-container {
+    padding-top: 10px;
+}
+
+#file-dir-div {
+    width: 100%;   
+}
+
+/* #ed-left-panel {
+    position:
+} */
+

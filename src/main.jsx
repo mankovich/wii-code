@@ -28,7 +28,6 @@ const router = createBrowserRouter([
         {
           path: 'editor/:roomId',
           element: <EditorPage />,
-          /* TODO: is this how this is going to work with the way we are doing the room checkouts or whatever? */
         },
         {
             path: 'collab-sign-in',

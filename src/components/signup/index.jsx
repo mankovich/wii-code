@@ -119,7 +119,7 @@ function SignupForm() {
                 Your password must be 8-20 alphanumeric characters long and must not contain any spaces, special characters, or emoji.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" size="sm" type="submit">
+            <Button variant="primary" size="sm" type="submit" id="signup-btn">
               Signup
             </Button>
           </Form>

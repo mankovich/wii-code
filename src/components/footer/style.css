@@ -25,5 +25,5 @@
     bottom: 10px;
     color: black;
     background-color: var(--button);
-    border: var(--button);
+    border-color: var(--button);
 }

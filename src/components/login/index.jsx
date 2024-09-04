@@ -87,7 +87,7 @@ function LoginForm() {
             <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
           </FloatingLabel>
         </Form.Group>
-        <Button variant="primary" size="sm" type="submit">
+        <Button variant="primary" size="sm" type="submit" id="login-btn">
           Login
         </Button>
       </Form>

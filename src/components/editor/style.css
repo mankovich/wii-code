@@ -19,7 +19,7 @@
 }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
-  background-color: white; /* The little square between H and V scrollbars */
+  background-color: var(--three); /* The little square between H and V scrollbars */
 }
 
 /* GUTTER */
@@ -162,6 +162,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
   margin-bottom: -50px; margin-right: -50px;
   padding-bottom: 50px;
   height: 100%;
+  min-height: 700px;
   outline: none; /* Prevent dragging from highlighting the element */
   position: relative;
   z-index: 0;
@@ -342,3 +343,27 @@ div.CodeMirror-dragcursors {
 
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext { background: none; }
+
+.remote-caret {
+  position: absolute;
+  border-left: black;
+  border-left-style: solid;
+  border-left-width: 2px;
+  height: 1em;
+}
+.remote-caret > div {
+  position: relative;
+  top: -0.4em;
+  font-size: 13px;
+  background-color: rgb(250, 129, 0);
+  font-family: serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  user-select: none;
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  z-index: 3;
+  border-radius: 20%;
+}
