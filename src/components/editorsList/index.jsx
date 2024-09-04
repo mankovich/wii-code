@@ -1,5 +1,6 @@
 import './style.css'
 
+
 function EditorsList (props) {
   return (
     <div className="editors-list">
