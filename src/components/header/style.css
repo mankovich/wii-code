@@ -22,17 +22,19 @@
 }
 
 #header-comp1, 
-#header-comp2 {
+#header-comp2, 
+#header-comp3 {
     color: var(--four);
     font-size: 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#header-comp1 {
+#header-comp1, 
+#header-comp2 {
     padding-top: 20px;
 }
 
-#header-comp2 {
+#header-comp3 {
     position: fixed;
     right: 15px;
     top: 15px;

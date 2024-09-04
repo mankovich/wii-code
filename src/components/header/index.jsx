@@ -17,21 +17,26 @@ function Header() {
     return (
         <>
             <Container id="app-header">
-                <Row className="" id="app-header">
-                    <Col lg={9} md={8} sm={8} xs={7}>
+                <Row id="app-header">
+                    <Col lg={9} md={8} sm={6} xs={5}>
                         <h1 id="app-title">
                            WiiCode
                         </h1>
                     </Col>
-                    <Col lg="auto" md="auto" sm={2} xs={3}>
+                    <Col lg="auto" md="auto" sm={2} xs={2}>
                         <div id="header-comp1">
-                            <p>Project Name/username</p>
+                            <p>insert</p>
                             {/* <p>insert</p> */}
                         </div>
                     </Col>
-                    <Col lg="auto" md="auto" sm={1} xs={1}>
+                    <Col lg="auto" md="auto" sm={2} xs={2}>
                         <div id="header-comp2">
-                            {/* <p>insert</p> */}
+                            <a href="#">Logout</a>
+                            {/* TODO: handleLogout */}
+                        </div>
+                    </Col>
+                    <Col lg="auto" md="auto" sm={2} xs={2}>
+                        <div id="header-comp3">
                             <NewProjectModal />
                         </div>
                     </Col>
