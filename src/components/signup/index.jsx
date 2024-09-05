@@ -7,7 +7,7 @@ import './style.css'
 
 function SignupForm() {
 
-    const  [userName, setUsername] = useState('');
+    // const  [userName, setUsername] = useState('');
     const  [email, setEmail] = useState('');
     const  [password, setPassword] = useState('');
     const  [verifyPassword, setVerifyPassword] = useState('');
@@ -20,7 +20,7 @@ function SignupForm() {
       const validateForm = () => {
         const newErrors = {};
     
-        if (!userName) newErrors.username = 'Username is required';
+        // if (!userName) newErrors.username = 'Username is required';
         if (!email) newErrors.email = 'Email is required';
         else if (!validateEmail(email)) newErrors.email = 'Invalid email address';
         if (!password) newErrors.password = 'Password is required';
@@ -34,7 +34,7 @@ function SignupForm() {
         const formErrors = validateForm();
     
         if (Object.keys(formErrors).length === 0) {
-          console.log('Form submitted successfully', { userName, email, password });
+          console.log('Form submitted successfully', { email, password });
           //add logic for signup with fetch to server side 
         } else {
           setErrors(formErrors);
@@ -43,7 +43,7 @@ function SignupForm() {
       return (
         <>
           <Form className="signup-form" onSubmit={handleSignup}>
-            <Form.Group className="mb-3" controlId="formNewUsername">
+            {/* <Form.Group className="mb-3" controlId="formNewUsername">
               <FloatingLabel controlId="floatingNewUsername" label="Enter a username" className="mb-3">
                 <Form.Control
                   type="text"
@@ -55,7 +55,7 @@ function SignupForm() {
                 />
                 <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
               </FloatingLabel>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" controlId="formEmail">
               <FloatingLabel controlId="floatingEmail" label="Enter an email address" className="mb-3">
                 <Form.Control

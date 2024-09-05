@@ -7,9 +7,9 @@ import { useLocation } from 'react-router-dom';
 import './style.css'
 
 function Footer() {
+    const location = useLocation();
 
-    const [render, setRender] = useState('');
-    /*TODO: ?? */
+    const isEditor = location.pathname === '/editor' || location.pathname.startsWith('/editor/');
 
     //button-loading state to give loading feedback to user during async render operation...
     const [isLoading, setLoading] = useState(false);
@@ -31,22 +31,6 @@ function Footer() {
         /*TODO:*/
     }
 
-    // const [btn, setBtnShow] = useState(false);
-
-    // function getPage() {
-    //     let location = useLocation()
-    //     console.log(location)
-        
-    // }
-
-    // function setBtn() {
-    //     console.log(window.location.pathname)
-    //     btn = useState(window.location.pathname === '/editor/*' ? 'visible' : 'hidden');
-    //     return btn
-    //     /* FIXME: HELP! lol */
-    // }
-
-
     return (
         <>
             <div id="app-footer">
@@ -61,17 +45,17 @@ function Footer() {
                             </div>
                         </Col>
                         <Col xs={3}>
-                            <Button
-                                variant='primary'
-                                size='sm'
-                                id='render-btn'
-                                // visibility={() => window.location.pathname === '/editor/*' ? 'visible' : 'hidden'}
-                                /*FIXME: HELP ME lol */
-                                disabled={isLoading}
-                                onClick={!isLoading ? handleClick : null}
-                            >
-                                {isLoading ? 'Loading...' : 'Render code'}
-                            </Button>
+                            {isEditor && (
+                                <Button
+                                    variant='primary'
+                                    size='sm'
+                                    id='render-btn'
+                                    disabled={isLoading}
+                                    onClick={!isLoading ? handleClick : null}
+                                >
+                                    {isLoading ? 'Loading...' : 'Render code'}
+                                </Button>
+                            )}
                         </Col>
                     </Row>
                 </Container>

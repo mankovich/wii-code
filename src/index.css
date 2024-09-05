@@ -4,10 +4,11 @@
     box-sizing: border-box;
     --one: rgb(22,22,20);
     --two: #d0d2f2;
-    --three: rgb(15, 15, 13);
+    --three: rgb(11, 11, 10);
     --four:  #d0d2f2;
     --five: #e1e305;
     --six: rgb(45, 45, 40);
+    --seven: rgb(21, 21, 21);
     --button: rgb(230, 139, 253);
     --neon: rgb(245, 0, 233);
 }
@@ -20,7 +21,7 @@ body {
 
 .main-container {
     min-height: 100vh;
-    padding-top: 55px;
+    padding-top: 60px;
 }
 
 #error-page {

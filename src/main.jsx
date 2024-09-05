@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         {
             path: 'collab-sign-in',
             element: <CollabSignInPage />
-        },
+        }
       ],
     },
   ]);
@@ -40,5 +40,3 @@ const router = createBrowserRouter([
 //Render RouterProvider component
 ReactDOM.createRoot(document.getElementById("root")).render(
 <RouterProvider router={router} />);
-// ReactDOM.createRoot(document.getElementById("root")).render(
-// <App />);
