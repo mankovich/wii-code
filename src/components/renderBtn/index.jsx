@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import './style.css'
 
-function RenderBtn() {
+function RenderBtn({saveFile, files, yMapRef, projectId}) {
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -21,6 +21,10 @@ function RenderBtn() {
     function handleClick() {
         setLoading(true);
         //add logic for rendering code think its just going to be window.location'pathname'
+        files.forEach((file) => {
+            saveFile(file.id, yMapRef.get(file.fileName).toString());
+        });
+        window.open(`${import.meta.env.VITE_SERVER}/render/${projectId}`, "_blank", "noreferrer");
     }
 
     return (

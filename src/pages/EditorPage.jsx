@@ -15,6 +15,7 @@ import Directory from '../components/directory/index.jsx'
 import EditorsList from '../components/editorsList/index.jsx'
 import Editor from '../components/editor/index.jsx'
 import RenderBtn from '../components/renderBtn/index.jsx'
+import saveFile from '../utils/files.js'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
@@ -48,8 +49,8 @@ function EditorPage(props) {
     // const ydoc = new Y.Doc();
     useEffect(() =>{
       if (!directory) {
-        axios.get("http://localhost:3001/api/project/1/1",
-            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1NTU2NjgsImV4cCI6MTcyNTU2Mjg2OH0.AaMQ0zzeD-dgsuBeyo99_ZOrDyAyU7Fo4iQ18s2b_L0` }}
+        axios.get(`${import.meta.env.VITE_SERVER}/api/project/1/${roomId}`,
+            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1NzEwMzAsImV4cCI6MTcyNTU3ODIzMH0.7U80cRY_i6FzTRH1qNi9UxsJd3mFEE4I6uU6AvhnrAE` }}
         )
         .then((res) => {
             console.log("Get directory: ", res.data[0].files);
@@ -69,21 +70,13 @@ function EditorPage(props) {
           const temp = new Y.Text();
           temp.applyDelta([{ insert: file.content }]);
           yMap.set(file.fileName, temp);
-          files.current.push(file.fileName);
+          files.current.push({fileName: file.fileName, id: file.ID});
         })
         yMapRef.current = yMap;
-        // const docA = new Y.Text()
-        // // Set initial content with the headline being the index of the documentList
-        // docA.applyDelta([{ insert: `Document A` }])
-        // yMap.set("A", docA);
-        // const docB = new Y.Text()
-        // // Set initial content with the headline being the index of the documentList
-        // docB.applyDelta([{ insert: `Document B` }])
-        // yMap.set("B", docB);
-        // yMapRef.current = yMap;
+
     
         // Undomanager used for stacking the undo and redo operation for yjs
-        undoManager.current = new Y.UndoManager(yMap);
+        undoManager.current = new Y.UndoManager(yMapRef.current);
 
         try {
             // syncs the ydoc throught WebRTC connection
@@ -111,24 +104,27 @@ function EditorPage(props) {
                 const users = (Array.from(awareness.current.getStates().values())).map((user) => user.user);
                 console.log("awareness received something");
                 setInRoomUsers(users);
-                console.log(yMapRef.current.toJSON());
+                files.current.forEach((file) => {
+                    saveFile(file.id, yMapRef.current.get(file.fileName).toString());
+                });
             })
 
-            yMapRef.current.observe((event) => {
-                event.changes.keys.forEach((change, key) => {
-                  if (change.action === 'add') {
-                    console.log(`Property "${key}" was added. Initial value: "${yMapRef.current.get(key)}".`)
-                  } else if (change.action === 'update') {
-                    console.log(`Property "${key}" was updated. New value: "${yMapRef.current.get(key)}". Previous value: "${change.oldValue}".`)
-                  } else if (change.action === 'delete') {
-                    console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
-                  }
-                })
-              });
+            // yMapRef.current.observe((event) => {
+            //     event.changes.keys.forEach((change, key) => {
+            //       if (change.action === 'add') {
+            //         console.log(`Property "${key}" was added. Initial value: "${yMapRef.current.get(key)}".`)
+            //       } else if (change.action === 'update') {
+            //         console.log(`Property "${key}" was updated. New value: "${yMapRef.current.get(key)}". Previous value: "${change.oldValue}".`)
+            //       } else if (change.action === 'delete') {
+            //         console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
+            //       }
+            //     })
+            //   });
 
             console.log("binding ",files.current[0]);
-            editorBinding.current = new CodemirrorBinding(yMapRef.current.get(files.current[0]), EditorRef, awareness.current, {yUndoManager: undoManager.current});
-
+            console.log(yMapRef.current.get(files.current[0].fileName).toString());
+            editorBinding.current = new CodemirrorBinding(yMapRef.current.get(files.current[0].fileName), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+            // setCurrentFile(files.current[0]);
           } catch (err) {
             alert(err + " error in initializing!");
           }
@@ -136,65 +132,13 @@ function EditorPage(props) {
     }, [directory])
 
 
-      // Yjs based real-time connection and collaboration 
-    // useEffect(() => {
-    //     // Collboration and connection starts after the editor is mounted
-    //     console.log("EditorRef useEffect" );
-    //     if (EditorRef) {
-
-    //     //   try {
-    //     //     // syncs the ydoc throught WebRTC connection
-    //     //     provider.current = new WebrtcProvider(
-    //     //       props.roomname ||"wii",
-    //     //       ydoc.current,
-    //     //       {
-    //     //         signaling: [
-    //     //             import.meta.env.VITE_WSS,
-    //     //         ],
-    //     //       }
-    //     //     );
-    //     //     console.log("provider: ", provider.current);
-
-    //     //     // Awareness protocol is used to propagate your information (cursor position , name , etc)
-    //     //     awareness.current = provider.current.awareness;
-    //     //     const color = RandomColor();
-    //     //     awareness.current.setLocalStateField("user", {
-    //     //         name: props.username || "user"+color,
-    //     //         color: color,
-    //     //     });
-    //     //     console.log("awareness.current: ", awareness.current);
-    //     //     // getting all users from the awareness, this is to show all users in the room view. 
-    //     //     awareness.current.on('update', () => {
-    //     //         const users = (Array.from(awareness.current.getStates().values())).map((user) => user.user);
-    //     //         setInRoomUsers(users);
-    //     //     })
-
-    //         // // Undomanager used for stacking the undo and redo operation for yjs
-    //         // setUndoManager(new Y.UndoManager(yMap));
-            
-    //         // Binds the Codemirror editor to Yjs text type
-    //         // editorBinding.current = new CodemirrorBinding(yMapRef.current.get("A"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
-
-    //     //   } catch (err) {
-    //     //     alert(err + " error in initial binding!");
-    //     //   }
-    //     //   return () => {
-    //     //     //Releasing the resources used and destroying the document
-    //     //     if (provider.current) {
-    //     //       provider.current.disconnect();
-    //     //       ydoc.current.destroy();
-    //     //     }
-    //     //   };
-    //     }
-    //   }, [EditorRef]);
-
     useEffect(() =>{
       if (currentFile) {
         // destory binding
       editorBinding.current.destroy();
       // create new binding
       console.log("new binding ", currentFile);
-      editorBinding.current = new CodemirrorBinding(yMapRef.current.get(currentFile), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+      editorBinding.current = new CodemirrorBinding(yMapRef.current.get(currentFile.fileName), EditorRef, awareness.current, {yUndoManager: undoManager.current});
       }
     }, [currentFile]);
  
@@ -217,7 +161,7 @@ function EditorPage(props) {
                 </div>
               </Stack>
               <Directory files={files.current} setCurrentFile={setCurrentFile} />
-              <RenderBtn />
+              <RenderBtn saveFile={saveFile} files={files.current} yMapRef={yMapRef.current} projectId={roomId} />
               <EditorsList users={inRoomUsers} />
             </Stack>
           </Col>
@@ -234,4 +178,3 @@ function EditorPage(props) {
 }
 
 export default EditorPage;
-
