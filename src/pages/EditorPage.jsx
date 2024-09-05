@@ -6,6 +6,7 @@ import { CodemirrorBinding } from "y-codemirror";
 import * as Y from "yjs";
 import { WebrtcProvider } from "y-webrtc";
 import RandomColor from "randomcolor";
+import axios from "axios";
 
 import CreateFile from '../components/createFile/index.jsx'
 import CreateFolder from '../components/createFolder/index.jsx'
@@ -28,77 +29,72 @@ import Stack from 'react-bootstrap/Stack'
 function EditorPage(props) {
     const [EditorRef, setEditorRef] = useState(null);
     const [inRoomUsers, setInRoomUsers] = useState([]);
-    const [directory, setDirectory] = useState([]);
+    const [directory, setDirectory] = useState(null);
     const [currentFile, setCurrentFile] = useState(null);
-    // const [editorBinding, setBinding] = useState(null);
-    // const [awareness, setAwareness] = useState(null);
-    // const [UndoManager, setUndoManager] = useState(null);
-    // const [yMap, setYMap] = useState(null);
+    // const [filesList, setFilesList] = useState([]]);
     const ydoc = useRef(new Y.Doc());
     const provider = useRef(null);
     const awareness = useRef(null);
     const editorBinding = useRef(null);
     const undoManager = useRef(null);
     const yMapRef = useRef(null);
+    const files = useRef([]);
 
+
+    const { roomId } = useParams(); 
 
     // Yjs document that holds shared data 
     // const ydoc = new Y.Doc();
     useEffect(() =>{
+      if (!directory) {
+        axios.get("http://localhost:3001/api/project/1/1",
+            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1MjU5MTgsImV4cCI6MTcyNTUzMzExOH0.y0sMwjUx_oHbeKafPv0mHzK3kkkQKDfoZX8Lef-bDvo` }}
+        )
+        .then((res) => {
+            console.log("Get directory: ", res.data[0].files);
+            setDirectory(res.data[0].files);
+        }).catch((err) => {
+                console.log(err);
+        });
+      }
+    }, [])
 
+    useEffect(() => {
+      if (directory) {
         const yMap = ydoc.current.getMap(props.roomname || "wii");
         yMap.observe((event) => {
-            event.changes.keys.forEach((change, key) => {
-              if (change.action === 'add') {
-                console.log(`Property "${key}" was added. Initial value: "${yMap.get(key)}".`)
-              } else if (change.action === 'update') {
-                console.log(`Property "${key}" was updated. New value: "${yMap.get(key)}". Previous value: "${change.oldValue}".`)
-              } else if (change.action === 'delete') {
-                console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
-             }
-            })
-          });
-        const docA = new Y.Text()
-        // Set initial content with the headline being the index of the documentList
-        docA.applyDelta([{ insert: `Document A` }])
-        console.log("Setting A into Map")
-        yMap.set("A", docA);
-        const docB = new Y.Text()
-        // Set initial content with the headline being the index of the documentList
-        docB.applyDelta([{ insert: `Document B` }])
-        console.log("Setting B into Map")
-        yMap.set("B", docB);
-        yMapRef.current = yMap;
+          event.changes.keys.forEach((change, key) => {
+            if (change.action === 'add') {
+              console.log(`Property "${key}" was added. Initial value: "${yMap.get(key)}".`)
+            } else if (change.action === 'update') {
+              console.log(`Property "${key}" was updated. New value: "${yMap.get(key)}". Previous value: "${change.oldValue}".`)
+            } else if (change.action === 'delete') {
+              console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
+            }
+          })
+        });
 
-    
-        // Awareness protocol is used to propagate your information (cursor position , name , etc)
-
-        // const color = RandomColor();
-        // awareness.setLocalStateField("user", {
-        //     name: props.username || "user"+color,
-        //     color: color,
-        // });
-        
-        // // getting all users from the awareness, this is to show all users in the room view. 
-        // awareness.on('update', () => {
-        //     const users = (Array.from(awareness.getStates().values())).map((user) => user.user);
-        //     setInRoomUsers(users);
-        //     console.log(inRoomUsers);
-        // })
+        directory.forEach((file) => {
+          const temp = new Y.Text();
+          temp.applyDelta([{ insert: file.content }]);
+          yMap.set(file.fileName, temp);
+          files.current.push(file.fileName);
+        })
+        yMapRef.current = yMap
+        // const docA = new Y.Text()
+        // // Set initial content with the headline being the index of the documentList
+        // docA.applyDelta([{ insert: `Document A` }])
+        // yMap.set("A", docA);
+        // const docB = new Y.Text()
+        // // Set initial content with the headline being the index of the documentList
+        // docB.applyDelta([{ insert: `Document B` }])
+        // yMap.set("B", docB);
+        // yMapRef.current = yMap;
     
         // Undomanager used for stacking the undo and redo operation for yjs
         undoManager.current = new Y.UndoManager(yMap);
 
-    }, [])
-
-
-      // Yjs based real-time connection and collaboration 
-    useEffect(() => {
-        // Collboration and connection starts after the editor is mounted
-        console.log("EditorRef useEffect" );
-        if (EditorRef) {
-
-          try {
+        try {
             // syncs the ydoc throught WebRTC connection
             provider.current = new WebrtcProvider(
               props.roomname ||"wii",
@@ -110,32 +106,6 @@ function EditorPage(props) {
               }
             );
             console.log("provider: ", provider.current);
-            // Define a shared text type on the document
-            // const yText = ydoc.getText("codemirror");
-            // setYMap(ydoc.getMap(props.roomname || "ninja3"));
-
-            // logs for any changes in yMap
-            // yMap.observe((event) => {
-            //   event.changes.keys.forEach((change, key) => {
-            //     if (change.action === 'add') {
-            //       console.log(`Property "${key}" was added. Initial value: "${yMap.get(key)}".`)
-            //     } else if (change.action === 'update') {
-            //       console.log(`Property "${key}" was updated. New value: "${yMap.get(key)}". Previous value: "${change.oldValue}".`)
-            //     } else if (change.action === 'delete') {
-            //       console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
-            //    }
-            //   })
-            // });
-            
-            // const docA = new Y.Text()
-            // // Set initial content with the headline being the index of the documentList
-            // docA.applyDelta([{ insert: `Document A` }])
-            // yMap.set("A", docA);
-            // const docB = new Y.Text()
-            // // Set initial content with the headline being the index of the documentList
-            // docB.applyDelta([{ insert: `Document B` }])
-            // yMap.set("B", docB);
-
 
             // Awareness protocol is used to propagate your information (cursor position , name , etc)
             awareness.current = provider.current.awareness;
@@ -148,30 +118,69 @@ function EditorPage(props) {
             // getting all users from the awareness, this is to show all users in the room view. 
             awareness.current.on('update', () => {
                 const users = (Array.from(awareness.current.getStates().values())).map((user) => user.user);
-                console.log("users: ", users);
                 setInRoomUsers(users);
-                console.log(inRoomUsers);
             })
-
-            // // Undomanager used for stacking the undo and redo operation for yjs
-            // setUndoManager(new Y.UndoManager(yMap));
-            
-            // Binds the Codemirror editor to Yjs text type
-            console.log(ydoc.current);
-            editorBinding.current = new CodemirrorBinding(yMapRef.current.get("A"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+            console.log("binding ",files.current[0]);
+            editorBinding.current = new CodemirrorBinding(yMapRef.current.get(files.current[0]), EditorRef, awareness.current, {yUndoManager: undoManager.current});
 
           } catch (err) {
-            alert(err + " error in collaborating try refreshing or come back later !");
+            alert(err + " error in initializing!");
           }
-          return () => {
-            //Releasing the resources used and destroying the document
-            if (provider.current) {
-              provider.current.disconnect();
-              ydoc.current.destroy();
-            }
-          };
         }
-      }, [EditorRef]);
+    }, [directory])
+
+
+      // Yjs based real-time connection and collaboration 
+    // useEffect(() => {
+    //     // Collboration and connection starts after the editor is mounted
+    //     console.log("EditorRef useEffect" );
+    //     if (EditorRef) {
+
+    //     //   try {
+    //     //     // syncs the ydoc throught WebRTC connection
+    //     //     provider.current = new WebrtcProvider(
+    //     //       props.roomname ||"wii",
+    //     //       ydoc.current,
+    //     //       {
+    //     //         signaling: [
+    //     //             import.meta.env.VITE_WSS,
+    //     //         ],
+    //     //       }
+    //     //     );
+    //     //     console.log("provider: ", provider.current);
+
+    //     //     // Awareness protocol is used to propagate your information (cursor position , name , etc)
+    //     //     awareness.current = provider.current.awareness;
+    //     //     const color = RandomColor();
+    //     //     awareness.current.setLocalStateField("user", {
+    //     //         name: props.username || "user"+color,
+    //     //         color: color,
+    //     //     });
+    //     //     console.log("awareness.current: ", awareness.current);
+    //     //     // getting all users from the awareness, this is to show all users in the room view. 
+    //     //     awareness.current.on('update', () => {
+    //     //         const users = (Array.from(awareness.current.getStates().values())).map((user) => user.user);
+    //     //         setInRoomUsers(users);
+    //     //     })
+
+    //         // // Undomanager used for stacking the undo and redo operation for yjs
+    //         // setUndoManager(new Y.UndoManager(yMap));
+            
+    //         // Binds the Codemirror editor to Yjs text type
+    //         // editorBinding.current = new CodemirrorBinding(yMapRef.current.get("A"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+
+    //     //   } catch (err) {
+    //     //     alert(err + " error in initial binding!");
+    //     //   }
+    //     //   return () => {
+    //     //     //Releasing the resources used and destroying the document
+    //     //     if (provider.current) {
+    //     //       provider.current.disconnect();
+    //     //       ydoc.current.destroy();
+    //     //     }
+    //     //   };
+    //     }
+    //   }, [EditorRef]);
 
     useEffect(() =>{
       if (currentFile) {
@@ -201,7 +210,7 @@ function EditorPage(props) {
                   <UploadFile />
                 </div>
               </Stack>
-              <Directory setCurrentFile={setCurrentFile} />
+              <Directory files={files.current} setCurrentFile={setCurrentFile} />
               <EditorsList users={inRoomUsers} />
             </Stack>
           </Col>

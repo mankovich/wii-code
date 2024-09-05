@@ -12,10 +12,10 @@ function Directory (props) {
                 <div id="dir-div">
                 <h5 id="dir-heading">File Directory</h5>
                 <ul>
-                    <li style={{color:"white"}} onClick={() => setFile("A")}>File A</li>
-                    <li style={{color:"white"}} onClick={() => setFile("B")}>File B</li>
-                    <li>file</li>
-                    <li>file</li>
+                {props.files.map((file) => (
+                    <li key={file} style={{color:"white"}} onClick={() => setFile(file)}>{`${file}`}</li>
+                    // <li style={{color:"white"}}>{`${file}`}</li>
+                ))}
                 </ul>
                 </div>
     </>
