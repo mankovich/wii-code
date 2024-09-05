@@ -5,7 +5,6 @@ import Modal from 'react-bootstrap/Modal'
 import './style.css'
 
 function AddFile () {
-
     return (
             <Button>upload a file</Button>
     )
