@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile } from '@fortawesome/free-solid-svg-icons'
+import { faFile, faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import './style.css'
 
 function CreateFile({projectId, directory=[], setDirectory}) {
@@ -42,7 +43,7 @@ function CreateFile({projectId, directory=[], setDirectory}) {
     return (
         <>
             <Button variant="primary" size="sm" onClick={handleShow} id="create-file-btn">
-                +<FontAwesomeIcon icon={faFile} role="img" aria-label="create file" title="create file" />
+            <FontAwesomeIcon icon={faPlus} /> <FontAwesomeIcon icon={faFile} role="img" aria-label="create file" title="create file" />
             </Button>
 
             <Modal

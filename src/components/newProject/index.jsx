@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Modal from 'react-bootstrap/Modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
 function NewProjectModal() {
@@ -18,7 +20,7 @@ function NewProjectModal() {
   return (
     <>
       <Button variant="primary" size="sm" onClick={handleShow} id="new-project-btn">
-        +Add Project
+        <FontAwesomeIcon icon={faPlus} />Project
       </Button>
 
       <Modal

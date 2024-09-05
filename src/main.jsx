@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         {
             path: 'collab-sign-in',
             element: <CollabSignInPage />
-        },
+        }
       ],
     },
   ]);
