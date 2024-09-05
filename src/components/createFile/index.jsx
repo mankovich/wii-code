@@ -6,14 +6,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFile } from '@fortawesome/free-solid-svg-icons'
 import './style.css'
 
-function CreateFile() {
+function CreateFile({projectId, directory=[], setDirectory}) {
 
     const [show, setShow] = useState(false);
+    const [fileName, setFileName] = useState("");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleCreateFile = () => {
+    const handleCreateFile = async () => {
+        if (fileName === ''){
+            alert("Please enter a file name!");
+            return;
+        }
+        const file = {fileName: fileName, content: "", project: projectId}
+        console.log("TOKEN: " + localStorage.getItem("token"));
+        try {
+            const rereadFile = await fetch(import.meta.env.VITE_SERVER ?? "http://localhost:3001" + "/api/file", {
+                method: "POST",
+                body: JSON.stringify(file),
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                    'Content-Type': 'application/json',
+                }
+            })
+            console.log([...directory, rereadFile]);
+            setDirectory([...directory, rereadFile]);
+        } catch (err) {
+            alert(err);
+            return
+        }
         setShow(false)
     }
 
@@ -38,7 +60,13 @@ function CreateFile() {
                 <Modal.Body id="modal-body">
                     <Form id="create-file-form">
                         <Form.Group className="mb-3" controlId="formCreateFile">
-                            <Form.Control type="text" placeholder="example.js"></Form.Control>
+                            <Form.Control 
+                            type="text" 
+                            placeholder="example.js"
+                            value={fileName}
+                            onChange={(e)=>{setFileName(e.target.value)}}
+                            >
+                            </Form.Control>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
