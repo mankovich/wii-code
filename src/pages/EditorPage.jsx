@@ -48,7 +48,7 @@ function EditorPage(props) {
     useEffect(() =>{
       if (!directory) {
         axios.get("http://localhost:3001/api/project/1/1",
-            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1MjU5MTgsImV4cCI6MTcyNTUzMzExOH0.y0sMwjUx_oHbeKafPv0mHzK3kkkQKDfoZX8Lef-bDvo` }}
+            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1NTU2NjgsImV4cCI6MTcyNTU2Mjg2OH0.AaMQ0zzeD-dgsuBeyo99_ZOrDyAyU7Fo4iQ18s2b_L0` }}
         )
         .then((res) => {
             console.log("Get directory: ", res.data[0].files);
@@ -61,18 +61,8 @@ function EditorPage(props) {
 
     useEffect(() => {
       if (directory) {
-        const yMap = ydoc.current.getMap(props.roomname || "wii");
-        yMap.observe((event) => {
-          event.changes.keys.forEach((change, key) => {
-            if (change.action === 'add') {
-              console.log(`Property "${key}" was added. Initial value: "${yMap.get(key)}".`)
-            } else if (change.action === 'update') {
-              console.log(`Property "${key}" was updated. New value: "${yMap.get(key)}". Previous value: "${change.oldValue}".`)
-            } else if (change.action === 'delete') {
-              console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
-            }
-          })
-        });
+        const yMap = ydoc.current.getMap("room" + roomId);
+
 
         directory.forEach((file) => {
           const temp = new Y.Text();
@@ -80,7 +70,7 @@ function EditorPage(props) {
           yMap.set(file.fileName, temp);
           files.current.push(file.fileName);
         })
-        yMapRef.current = yMap
+        yMapRef.current = yMap;
         // const docA = new Y.Text()
         // // Set initial content with the headline being the index of the documentList
         // docA.applyDelta([{ insert: `Document A` }])
@@ -97,7 +87,7 @@ function EditorPage(props) {
         try {
             // syncs the ydoc throught WebRTC connection
             provider.current = new WebrtcProvider(
-              props.roomname ||"wii",
+              "room" + roomId,
               ydoc.current,
               {
                 signaling: [
@@ -116,10 +106,25 @@ function EditorPage(props) {
             });
             console.log("awareness.current: ", awareness.current);
             // getting all users from the awareness, this is to show all users in the room view. 
-            awareness.current.on('update', () => {
+            awareness.current.on('change', () => {
                 const users = (Array.from(awareness.current.getStates().values())).map((user) => user.user);
+                console.log("awareness received something");
                 setInRoomUsers(users);
+                console.log(yMapRef.current.toJSON());
             })
+
+            yMapRef.current.observe((event) => {
+                event.changes.keys.forEach((change, key) => {
+                  if (change.action === 'add') {
+                    console.log(`Property "${key}" was added. Initial value: "${yMapRef.current.get(key)}".`)
+                  } else if (change.action === 'update') {
+                    console.log(`Property "${key}" was updated. New value: "${yMapRef.current.get(key)}". Previous value: "${change.oldValue}".`)
+                  } else if (change.action === 'delete') {
+                    console.log(`Property "${key}" was deleted. Previous value: "${change.oldValue}".`)
+                  }
+                })
+              });
+
             console.log("binding ",files.current[0]);
             editorBinding.current = new CodemirrorBinding(yMapRef.current.get(files.current[0]), EditorRef, awareness.current, {yUndoManager: undoManager.current});
 
@@ -201,7 +206,7 @@ function EditorPage(props) {
             <Stack gap={3}>
               <Stack direction="horizontal" gap={1}>
                 <div >
-                  <CreateFile />
+                  <CreateFile projectId={roomId} directory={directory} setDirectory={setDirectory}/>
                 </div>
                 <div className="ms-auto" >
                   <CreateFolder />
