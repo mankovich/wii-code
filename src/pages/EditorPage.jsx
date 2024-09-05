@@ -13,6 +13,7 @@ import UploadFile from '../components/uploadFile/index.jsx'
 import Directory from '../components/directory/index.jsx'
 import EditorsList from '../components/editorsList/index.jsx'
 import Editor from '../components/editor/index.jsx'
+import RenderBtn from '../components/renderBtn/index.jsx'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
@@ -202,6 +203,7 @@ function EditorPage(props) {
                 </div>
               </Stack>
               <Directory setCurrentFile={setCurrentFile} />
+              <RenderBtn />
               <EditorsList users={inRoomUsers} />
             </Stack>
           </Col>

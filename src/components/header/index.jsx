@@ -34,7 +34,7 @@ function Header() {
                     )}
                     {inEditor && (
                         <div id="header-comp1">
-                            <p>{username}</p>
+                            <p>Project Name</p>
                         </div>
                     )}
                     {isIn && (
