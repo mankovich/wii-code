@@ -4,9 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack'
 import './style.css'
 
-
-
-
 function Header(props) {
     const location = useLocation();
 
