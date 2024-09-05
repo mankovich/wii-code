@@ -7,10 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
 import './style.css'
 
-function ProjectCard() {
-    const [name, setName] = useState('');
 
-    const [file, setFile] = useState('');
+function ProjectCard(props) {
 
     return (
         <>
@@ -18,15 +16,19 @@ function ProjectCard() {
                 <Container>
                     <Row>
                         <Col >
-                            <h4 id="project-name">Project Name</h4>
+                            {props.project.map(project => (
+                                <h4 key={project.ID} id="project-name">{project.projectName}</h4>
+                            ))}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={6} className="card-padding">
-                            <ul>
-                                <li>index.html</li>
-                                <li>style.css</li>
-                                <li>index.js</li>
+                            <ul className="lisy-group">
+                                {props.project.dataValues.files.map(file => (
+                                    <li className="list-group-item" key={file.ID}>
+                                        {file.fileName}
+                                    </li>
+                                ))}
                             </ul>
                         </Col>
                         <Col xs={6}>

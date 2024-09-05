@@ -40,15 +40,15 @@ function LoginForm() {
         body: JSON.stringify({ email, password }),
       })
       .then((response) => response.json())
-        .then((data) => {
-          if (data.user && data.user.email) { 
-            setUsername(data.user.email);  
-            navigate('/profile');
-            console.log('Success:', data);
-          } else {
-            
-            console.error('Login successful but no username found in response:', data);
-          }
+      .then((data) => {
+        if (data.user && data.user.email) {
+          setUsername(data.user.email);  
+          localStorage.setItem('token', data.token);  
+          navigate('/profile');
+          console.log('Success:', data);
+        } else {
+          console.error('Login successful but no email found in response:', data);
+        }
         })
         .catch((error) => {
           console.error('Error:', error);

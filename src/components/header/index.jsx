@@ -1,51 +1,50 @@
-import React, { useContext } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import NewProjectModal from '../newProject/index.jsx';
-import { UserContext } from '../../contexts/userContext.jsx'; 
-
 import Stack from 'react-bootstrap/Stack'
-// import Button from 'react-bootstrap/Button';
 import './style.css'
 
-import NewProjectModal from '../newProject/index.jsx'
 
 
-function Header() {
-  const location = useLocation();
-  const { username } = useContext(UserContext); 
+
+function Header(props) {
+    const location = useLocation();
 
 
-  const isProfilePage = location.pathname === '/profile';
+    const isIn = location.pathname.startsWith('/editor/') || location.pathname.startsWith('/profile')
 
-  return (
-    <Container id="app-header">
-      <Row id="app-header">
-        <Col lg={9} md={8} sm={8} xs={7}>
-          <h1 id="app-title">WiiCode</h1>
-        </Col>
-        <Col lg="auto" md="auto" sm={2} xs={3}>
-          <div id="header-comp1">
-            {isProfilePage ? (
-              <p>{username}</p> 
-            ) : (
-              <p>Project 1</p> 
-            )}
-          </div>
-        </Col>
-        {!isProfilePage && (
-          <Col lg="auto" md="auto" sm={1} xs={1}>
-            <div id="header-comp2">
-              <NewProjectModal />
-            </div>
-          </Col>
-        )}
-      </Row>
-    </Container>
-  );
+    const inProfile = location.pathname.startsWith('/profile')
+
+    const inEditor = location.pathname.startsWith('/editor/')
+
+    return (
+        <>
+            <Container fluid id="app-header">
+                <Stack direction="horizontal" gap={3}>
+                    <div>
+                        <h1 id="app-title">WiiCode</h1>
+                    </div>
+                    {inProfile && (
+                        <div id="header-comp1" >
+                            <p>Email address</p>
+                        </div>
+                    )} 
+                    {inEditor && (
+                        <div id="header-comp1" >
+                            <p>Project Name</p>
+                        </div>
+                    )}
+                    {isIn && (
+                        <div id="header-comp2">
+                            <p><a href="#">Logout</a></p>
+                        </div>
+                    )}
+                </Stack>
+
+
+            </Container>
+        </>
+    )
 }
 
 export default Header;
