@@ -1,6 +1,6 @@
 #app-header {
     width: 100vw;
-    height: 55px;
+    height: 60px;
     border-bottom: solid black 2px;
     background-color: var(--three);
     position: fixed;
@@ -9,33 +9,36 @@
     margin: 0px;
     padding-right: 20px;
     z-index: 10;
+    background-image: linear-gradient(var(--three), var(--seven), var(--three))
 }
 
 #app-title {
     color: black;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 600;
     font-family:'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 2px black, 0 0 18px var(--button), 0 0 4px var(--four), 0 0 1px rgb(255, 0, 242);
+    text-shadow: 1px 1px 2px black, 1px 1px 1px var(--button), 0 0 18px var(--two), 0 0 6px var(--four), 0 0 2px rgb(255, 0, 242), 2px 2px 4px black, 2px 2px 3px var(--button);
     padding-top: 12px;
     padding-left: 10px;
 }
 
-#header-comp1, 
-#header-comp2 {
-    color: var(--four);
+#header-comp1 {
+    
+    position: fixed;
+    top: 17px;
+    right: 115px;
+    font-weight: 600;
     font-size: 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-#header-comp1 {
-    padding-top: 20px;
+    color: var(--two);
 }
 
 #header-comp2 {
     position: fixed;
-    right: 15px;
-    top: 15px;
+    right: 25px;
+    top: 18px;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
  
 
