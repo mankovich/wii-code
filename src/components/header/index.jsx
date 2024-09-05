@@ -1,51 +1,53 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import NewProjectModal from '../newProject/index.jsx';
 import { UserContext } from '../../contexts/userContext.jsx'; 
-
-import Stack from 'react-bootstrap/Stack'
-// import Button from 'react-bootstrap/Button';
-import './style.css'
-
-import NewProjectModal from '../newProject/index.jsx'
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Stack from 'react-bootstrap/Stack';
+import './style.css';
 
 function Header() {
-  const location = useLocation();
-  const { username } = useContext(UserContext); 
+    const location = useLocation();
+    const navigate = useNavigate(); 
+    const { username } = useContext(UserContext);
 
+    const isIn = location.pathname.startsWith('/editor/') || location.pathname.startsWith('/profile');
+    const inProfile = location.pathname.startsWith('/profile');
+    const inEditor = location.pathname.startsWith('/editor/');
 
-  const isProfilePage = location.pathname === '/profile';
+    
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
 
-  return (
-    <Container id="app-header">
-      <Row id="app-header">
-        <Col lg={9} md={8} sm={8} xs={7}>
-          <h1 id="app-title">WiiCode</h1>
-        </Col>
-        <Col lg="auto" md="auto" sm={2} xs={3}>
-          <div id="header-comp1">
-            {isProfilePage ? (
-              <p>{username}</p> 
-            ) : (
-              <p>Project 1</p> 
-            )}
-          </div>
-        </Col>
-        {!isProfilePage && (
-          <Col lg="auto" md="auto" sm={1} xs={1}>
-            <div id="header-comp2">
-              <NewProjectModal />
-            </div>
-          </Col>
-        )}
-      </Row>
-    </Container>
-  );
+    return (
+        <>
+            <Container fluid id="app-header">
+                <Stack direction="horizontal" gap={3}>
+                    <div>
+                        <h1 id="app-title">WiiCode</h1>
+                    </div>
+                    {inProfile && (
+                        <div id="header-comp1">
+                            <p>{username}</p>
+                        </div>
+                    )}
+                    {inEditor && (
+                        <div id="header-comp1">
+                            <p>{username}</p>
+                        </div>
+                    )}
+                    {isIn && (
+                        <div id="header-comp2">
+                            <p><a href="#" onClick={handleLogout}>Logout</a></p>
+                        </div>
+                    )}
+                </Stack>
+            </Container>
+        </>
+    );
 }
 
 export default Header;
+
+
