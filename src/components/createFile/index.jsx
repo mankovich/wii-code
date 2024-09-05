@@ -31,13 +31,19 @@ function CreateFile({projectId, directory=[], setDirectory}) {
                     'Content-Type': 'application/json',
                 }
             })
-            console.log([...directory, rereadFile]);
-            setDirectory([...directory, rereadFile]);
+            const rereadJson = await rereadFile.json();
+            if (rereadJson.error){
+                alert(rereadJson.error);
+                return
+            }
+            console.log("Added file got back:");
+            console.log(rereadJson);
+            setDirectory([...directory, rereadJson]);
+            setShow(false)
         } catch (err) {
             alert(err);
             return
         }
-        setShow(false)
     }
 
     return (
