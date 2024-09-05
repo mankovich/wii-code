@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/userContext';
 
 function LoginForm() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+  const { setUsername } = useContext(UserContext);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,12 +31,33 @@ function LoginForm() {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
-      console.log('Form submitted successfully', { email, password });
-      // add in the logic for server side api 
+    
+      fetch('http://localhost:3001/api/user/login', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.user && data.user.email) {
+          setUsername(data.user.email);  
+          localStorage.setItem('token', data.token);  
+          navigate('/profile');
+          console.log('Success:', data);
+        } else {
+          console.error('Login successful but no email found in response:', data);
+        }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     } else {
       setErrors(formErrors);
     }
-  };
+  }
+  
 
   return (
     <>
