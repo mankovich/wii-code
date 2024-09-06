@@ -7,15 +7,16 @@
     left: 0px;
     bottom: 0px;
     margin: 0px;
-    background-image: linear-gradient(var(--three), var(--seven), var(--three))
+    background-image: linear-gradient(var(--three), var(--seven), var(--three));
+    z-index: 10;
 }
 
 #footer-copyright {
-    color: var(--four);
+    color: var(--two);
     font-size: 12px;
     font-weight: 400;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-top: 18px;
     text-align: center;
-    /* text-shadow: 1px 1px 1px black, 0 0 10px var(--button), 0 0 20px var(--four), 2px 2px 1px var(--button), 0 0 1px var(--neon); */
+    /* text-shadow: 1px 1px 1px black, 0 0 10px var(--button), 0 0 20px var(--two), 2px 2px 1px var(--button), 0 0 1px var(--neon); */
 }

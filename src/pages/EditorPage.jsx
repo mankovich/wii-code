@@ -20,8 +20,7 @@ import saveFile from '../utils/files.js'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Stack from 'react-bootstrap/Stack'
-// import './style.css'
+import Stack from 'react-bootstrap/Stack';
 
 // props
 // projectName = roomName
@@ -35,6 +34,7 @@ function EditorPage(props) {
     const [currentFile, setCurrentFile] = useState(null);
     const [isVerified, setIsVerified] = useState(false);
     const [error, setError] = useState(null);
+    const [projName, setProjName] = useState('');
     const ydoc = useRef(new Y.Doc());
     const provider = useRef(null);
     const awareness = useRef(null);
@@ -103,7 +103,9 @@ function EditorPage(props) {
         )
         .then((res) => {
             console.log("Get directory: ", res.data.files);
+            console.log(`\n\nres.data: `, res.data)
             setDirectory(res.data.files);
+            setProjName(res.data.projectName)
         }).catch((err) => {
                 console.log(err);
         });
@@ -202,6 +204,7 @@ function EditorPage(props) {
         <Row>
           <Col xs={5} sm={4} md={3} xl={2} id="ed-left-panel" className="position-fixed top-55 start-0">
             <Stack gap={3}>
+              <p id="proj-name">{projName}</p>
               <Stack direction="horizontal" gap={1}>
                 <div >
                   <CreateFile projectId={roomId} directory={directory} setDirectory={setDirectory}/>
@@ -222,7 +225,6 @@ function EditorPage(props) {
             </Col>
             <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
               <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
-
             </Col>
           </Row>
         </Container>
