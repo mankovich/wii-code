@@ -57,6 +57,7 @@ function SignupForm() {
               setUsername(data.user.email);  
               localStorage.setItem('token', data.token);
               localStorage.setItem('userId', data.user.ID);  
+              localStorage.setItem('email', data.user.email);  
               navigate('/profile');
               console.log('Success:', data);
             } else {
