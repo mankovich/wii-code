@@ -53,15 +53,16 @@ function EditorPage(props) {
         console.log('Token from localStorage:', token);
         if (!token) {
             setError('No token found');
+            navigate('/', {state: {redirectURL: `editor/${roomId}`}});
             return
         }
 
         try {
-            const response = await fetch('http://localhost:3001/api/user/profile', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER}/api/user/profile`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `${token}`,
                 }
             })
 
@@ -69,20 +70,24 @@ function EditorPage(props) {
             console.log('Response status:', response.status);
             if (response.ok && data) {
                 setIsVerified(true);
+                return
             } else {
                 setError('Invalid token');
-                navigate('/');
+                navigate('/', {state: {redirectURL: `editor/${roomId}`}});
+                return
             }
         } catch (err) {
             console.error('Error verifying token:', err);
             setError('Error verifying token');
-            navigate('/');
+            navigate('/', {state: {redirectURL: `editor/${roomId}`}});
+            return
         }
     }
 
     // Yjs document that holds shared data 
     // const ydoc = new Y.Doc();
     useEffect(() =>{
+      verifyToken();
       const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId')
       console.log('Token from localStorage:', token);
@@ -97,8 +102,8 @@ function EditorPage(props) {
             {headers: { Authorization: `${token}` }}
         )
         .then((res) => {
-            console.log("Get directory: ", res.data[0].files);
-            setDirectory(res.data[0].files);
+            console.log("Get directory: ", res.data.files);
+            setDirectory(res.data.files);
         }).catch((err) => {
                 console.log(err);
         });
