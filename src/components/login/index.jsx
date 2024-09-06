@@ -6,6 +6,7 @@ import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/userContext';
 
+
 function LoginForm() {
 
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ function LoginForm() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { setUsername } = useContext(UserContext);
+
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,7 +34,7 @@ function LoginForm() {
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
     
-      fetch('http://localhost:3001/api/user/login', { 
+      fetch(`${import.meta.env.VITE_SERVER}/api/user/login`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +45,9 @@ function LoginForm() {
       .then((data) => {
         if (data.user && data.user.email) {
           setUsername(data.user.email);  
-          localStorage.setItem('token', data.token);  
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userId', data.user.ID);  
+          
           navigate('/profile');
           console.log('Success:', data);
         } else {
@@ -67,7 +71,7 @@ function LoginForm() {
             <Form.Control
               type="email"
               placeholder="Email"
-              autoFocus
+              // autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               isInvalid={!!errors.email}

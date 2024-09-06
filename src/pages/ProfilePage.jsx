@@ -1,36 +1,76 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-// Bringing in the required component from 'react-router-dom' for linking between pages
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 import NewProjectModal from '../components/newProject/index.jsx';
 import ProjectCard from '../components/projectCard/index.jsx'
-
+import ProjCardDiv from '../components/projCardDiv/index.jsx'
 
 import '../index.css'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
 function ProfilePage() {
-    const [projects, setProjects] = useState([]);
+    const [isVerified, setIsVerified] = useState(false);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-    const getProjs = async () => {
-        const projects = await axios.get('http://localhost:3001/api/project/:userId')
-        return projects
-    };
+    async function verifyToken() {
+        const token = localStorage.getItem('token');
 
-    const getUserProjsAndFiles = async (user) => {
-        const { data } = await getProjs(user);
-        setProjects(data.data);
+        console.log('Token from localStorage:', token);
+        if (!token) {
+            setError('No token found');
+            return
+        }
+
+        try {
+            const response = await fetch('http://localhost:3001/api/user/profile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+            const data = await response.json();
+            console.log('Response status:', response.status);
+            if (response.ok && data) {
+                setIsVerified(true);
+            } else {
+                setError('Invalid token');
+                navigate('/');
+            }
+        } catch (err) {
+            console.error('Error verifying token:', err);
+            setError('Error verifying token');
+            navigate('/');
+        }
     }
 
-    useEffect(() => {
-        const token = async () => {
+    const [projects, setProjects] = useState([]);
 
-        }
-        getUserProjsAndFiles(user);
+    const userId = localStorage.getItem('userId')
+
+    const loadProjs = async () => {
+        const token = localStorage.getItem('token');
+        console.log(token)
+        const projectsData = await axios.get(`${import.meta.env.VITE_SERVER}/api/project/${userId}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${token}`,
+            }
+        })
+        setProjects(projectsData.data);
+    };
+
+    useEffect(() => {
+        verifyToken();
+    }, []);
+
+    useEffect(() => {
+        loadProjs();
     }, []);
 
     return (
@@ -47,11 +87,13 @@ function ProfilePage() {
                     </Row>
                     <Row>
                         <Stack>
-
-                            <ProjectCard projects={projects} />
+                            {projects?.map((project) => (
+                                <ProjCardDiv key={projects.ID}>
+                                    <ProjectCard project={project} />
+                                </ProjCardDiv>
+                            ))}
                         </Stack>
                     </Row>
-
                 </Container>
             </div>
         </>

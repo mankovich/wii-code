@@ -1,7 +1,7 @@
 #app-header {
     width: 100vw;
     height: 60px;
-    border-bottom: solid black 2px;
+    border-bottom: solid black 3px;
     background-color: var(--three);
     position: fixed;
     left: 0px;
@@ -14,31 +14,44 @@
 
 #app-title {
     color: black;
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 600;
     font-family:'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 2px black, 1px 1px 1px var(--button), 0 0 18px var(--two), 0 0 6px var(--four), 0 0 2px rgb(255, 0, 242), 2px 2px 4px black, 2px 2px 3px var(--button);
-    padding-top: 12px;
+    text-shadow: 1px 1px 2px black, 1px 1px 1px var(--button), 0 0 18px var(--two), 0 0 8px var(--four), 0 0 2px var(--neon), 2px 2px 4px black, 2px 2px 3px var(--button);
+    padding-top: 10px;
     padding-left: 10px;
 }
 
 #header-comp1 {
     
     position: fixed;
-    top: 17px;
-    right: 115px;
+    top: 22px;
+    right: 150px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--two);
+    text-shadow: 1px 1px 1px black, 2px 2px 1px var(--neon);
 }
 
 #header-comp2 {
     position: fixed;
-    right: 25px;
-    top: 18px;
+    right: 30px;
+    top: 26px;
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
 }
- 
 
+#logout-link {
+    color: var(--button);
+    text-shadow: 1px 1px 1px black, 1px 1px 2px var(--button);
+    cursor: pointer;
+}
+
+#logout-link:hover {
+    font-size: 20px;
+    position: fixed;
+    right: 28px;
+    top: 23px;
+}

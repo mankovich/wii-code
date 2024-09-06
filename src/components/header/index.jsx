@@ -1,21 +1,25 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { UserContext } from '../../contexts/userContext.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPersonThroughWindow } from '@fortawesome/free-solid-svg-icons';
 import './style.css'
 
-
-
-
-function Header(props) {
+function Header() {
     const location = useLocation();
-
+    const navigate = useNavigate();
+    const { username } = useContext(UserContext);
 
     const isIn = location.pathname.startsWith('/editor/') || location.pathname.startsWith('/profile')
-
     const inProfile = location.pathname.startsWith('/profile')
-
     const inEditor = location.pathname.startsWith('/editor/')
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
 
     return (
         <>
@@ -26,7 +30,7 @@ function Header(props) {
                     </div>
                     {inProfile && (
                         <div id="header-comp1" >
-                            <p>Email address</p>
+                            <p>{username}</p>
                         </div>
                     )} 
                     {inEditor && (
@@ -36,12 +40,12 @@ function Header(props) {
                     )}
                     {isIn && (
                         <div id="header-comp2">
-                            <p><a href="#">Logout</a></p>
+                            <p><a id="logout-link" onClick={handleLogout}>
+                                Logout <FontAwesomeIcon icon={faPersonThroughWindow} id="logout-icon"/>
+                            </a></p>
                         </div>
                     )}
                 </Stack>
-
-
             </Container>
         </>
     )
