@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import './style.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../contexts/userContext';
 
 
@@ -13,6 +13,8 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
+  const { redirectURL } = location.state || "/profile";
   const { setUsername } = useContext(UserContext);
 
 
@@ -48,7 +50,7 @@ function LoginForm() {
           localStorage.setItem('token', data.token);
           localStorage.setItem('userId', data.user.ID);  
           
-          navigate('/profile');
+          navigate(redirectURL);
           console.log('Success:', data);
         } else {
           console.error('Login successful but no email found in response:', data);
@@ -61,6 +63,13 @@ function LoginForm() {
       setErrors(formErrors);
     }
   }
+
+  useEffect( 
+    () => {
+      console.log('redirectURL:')
+      console.log(redirectURL)
+    }
+  , [])  
   
 
   return (
