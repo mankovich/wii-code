@@ -53,10 +53,10 @@ function NewProjectModal() {
           </Form>
         </Modal.Body>
         <Modal.Footer id="modal-footer">
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} id="cancel-proj-btn">
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleNewProj} id="create-btn">
+          <Button variant="primary" onClick={handleNewProj} id="create-proj-btn">
             Create project
           </Button>
         </Modal.Footer>

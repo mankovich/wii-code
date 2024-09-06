@@ -4,4 +4,27 @@
     border-color: var(--button);
     font-size: 18px;
     box-shadow: 1px 1px 2px black, 1px 1px 4px var(--neon);
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 20px;
+}
+
+#upload-btn {
+    color: black;
+    background-color: var(--button);
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 1px 1px 2px var(--button), 2px 2px 2px black;
+    margin-right: 3px;
+}
+
+#cancel-upload-btn {
+    /* color: black;
+    background-color: var(--button);
+    border-color: var(--button); */
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 1px 1px 2px #999999, 2px 2px 2px black;
+    border: none;
 }

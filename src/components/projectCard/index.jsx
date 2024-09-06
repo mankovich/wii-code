@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +9,9 @@ import './style.css'
 
 
 function ProjectCard(props) {
+    useEffect(() =>{
+        console.log(props.project)
+    }, [props.project])
 
     return (
         <>
@@ -16,26 +19,27 @@ function ProjectCard(props) {
                 <Container>
                     <Row>
                         <Col >
-                            {props.project.map(project => (
-                                <h4 key={project.ID} id="project-name">{project.projectName}</h4>
-                            ))}
+                            <h4 key={props.project.ID} id="project-name">
+                                {props.project.projectName}
+                            </h4>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={6} className="card-padding">
-                            <ul className="lisy-group">
-                                {props.project.dataValues.files.map(file => (
-                                    <li className="list-group-item" key={file.ID}>
-                                        {file.fileName}
-                                    </li>
-                                ))}
+                        <Col xs={10}>
+                            <ul id="card-padding">
+                                {props.project.files?.map(file => (
+                                        <li key={file.ID}>
+                                        {file.fileName}</li>
+                                    )
+                                )}
                             </ul>
                         </Col>
-                        <Col xs={6}>
-                            <Stack direction='horizontal' gap={2}>
+                        <Col xs={2}>
+                            {/* <Stack direction='horizontal' gap={2}>
                                 <Form.Control className="me-auto" placeholder="Enter room passcode" id="room-input" />
                                 <Button variant="primary" size="small" id="go-button">Enter</Button>
-                            </Stack>
+                            </Stack> */}
+                            <Button variant="primary" size="small" id="enter-room-button">Enter room</Button>
                         </Col>
                     </Row>
                 </Container>

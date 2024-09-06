@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 // Bringing in the required component from 'react-router-dom' for linking between pages
 import { Link, useParams } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import RandomColor from "randomcolor";
 import axios from "axios";
 
 import CreateFile from '../components/createFile/index.jsx'
-import CreateFolder from '../components/createFolder/index.jsx'
+// import CreateFolder from '../components/createFolder/index.jsx'
 import UploadFile from '../components/uploadFile/index.jsx'
 import Directory from '../components/directory/index.jsx'
 import EditorsList from '../components/editorsList/index.jsx'
@@ -132,9 +132,9 @@ function EditorPage(props) {
     }, [directory])
 
 
-    useEffect(() =>{
-      if (currentFile) {
-        // destory binding
+  useEffect(() => {
+    if (currentFile) {
+      // destory binding
       editorBinding.current.destroy();
       // create new binding
       console.log("new binding ", currentFile);
@@ -155,25 +155,27 @@ function EditorPage(props) {
                 </div>
                 <div className="ms-auto" >
                   <CreateFolder />
+                </div> */}
+                  <div className="ms-auto" >
+                    <UploadFile />
+                  </div>
+                </Stack>
+                <Directory files={files.current} setCurrentFile={setCurrentFile} />
+                <div id="render-btn-div">
+                  <RenderBtn saveFile={saveFile} files={files.current} yMapRef={yMapRef.current} projectId={roomId} />
                 </div>
-                <div className="ms-auto" >
-                  <UploadFile />
-                </div>
+                <EditorsList users={inRoomUsers} />
               </Stack>
-              <Directory files={files.current} setCurrentFile={setCurrentFile} />
-              <RenderBtn saveFile={saveFile} files={files.current} yMapRef={yMapRef.current} projectId={roomId} />
-              <EditorsList users={inRoomUsers} />
-            </Stack>
-          </Col>
-          <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
-            <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
-      
-          </Col>
-        </Row>
-      </Container>
+            </Col>
+            <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
+              <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
+
+            </Col>
+          </Row>
+        </Container>
+      </>
     </>
-        </>
-    )
+  )
 
 }
 
