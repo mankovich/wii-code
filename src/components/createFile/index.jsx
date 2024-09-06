@@ -23,7 +23,7 @@ function CreateFile({projectId, directory=[], setDirectory}) {
         const file = {fileName: fileName, content: "", project: projectId}
         console.log("TOKEN: " + localStorage.getItem("token"));
         try {
-            const rereadFile = await fetch(import.meta.env.VITE_SERVER ?? "http://localhost:3001" + "/api/file", {
+            const rereadFile = await fetch(import.meta.env.VITE_SERVER + "/api/file", {
                 method: "POST",
                 body: JSON.stringify(file),
                 headers: {
@@ -31,6 +31,8 @@ function CreateFile({projectId, directory=[], setDirectory}) {
                     'Content-Type': 'application/json',
                 }
             })
+            console.log(`\n\n\nlets see\n\n\n`)
+            console.log(rereadFile)
             const rereadJson = await rereadFile.json();
             if (rereadJson.error){
                 alert(rereadJson.error);
@@ -40,6 +42,7 @@ function CreateFile({projectId, directory=[], setDirectory}) {
             console.log(rereadJson);
             setDirectory([...directory, rereadJson]);
             setShow(false)
+            location.reload()
         } catch (err) {
             alert(err);
             return
