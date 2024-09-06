@@ -32,9 +32,9 @@ function Header() {
                         <div id="header-comp1" >
                             <p>{username}</p>
                         </div>
-                    )} 
+                    )}
                     {inEditor && (
-                        <div id="header-comp1" >
+                        <div id="header-comp1">
                             <p>Project Name</p>
                         </div>
                     )}
@@ -48,7 +48,9 @@ function Header() {
                 </Stack>
             </Container>
         </>
-    )
+    );
 }
 
 export default Header;
+
+
