@@ -14,7 +14,7 @@ function LoginForm() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
-  const { redirectURL } = location.state || "/profile";
+  const { redirectURL } = location.state || { redirectURL: "/profile" };
   const { setUsername } = useContext(UserContext);
 
 
