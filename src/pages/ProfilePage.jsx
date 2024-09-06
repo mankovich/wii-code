@@ -97,7 +97,7 @@ function ProfilePage() {
                         <Stack>
                             {projects?.map((project) => (
                                 <ProjCardDiv key={projects.ID}>
-                                    <ProjectCard project={project} />
+                                    <ProjectCard ownerId={userId} project={project} />
                                 </ProjCardDiv>
                             ))}
                         </Stack>

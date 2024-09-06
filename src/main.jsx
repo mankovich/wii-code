@@ -26,7 +26,7 @@ const router = createBrowserRouter([
           element: <ProfilePage />,
         },
         {
-          path: 'editor/:roomId',
+          path: 'editor/:ownerId/:roomId',
           element: <EditorPage />,
         },
         {

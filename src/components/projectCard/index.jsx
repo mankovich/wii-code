@@ -39,7 +39,7 @@ function ProjectCard(props) {
                                 <Form.Control className="me-auto" placeholder="Enter room passcode" id="room-input" />
                                 <Button variant="primary" size="small" id="go-button">Enter</Button>
                             </Stack> */}
-                            <Button variant="primary" size="small" id="enter-room-button" onClick={() => {window.open(`/editor/${props.project.ID}`, "_blank", "noreferrer")}}>Enter room</Button>
+                            <Button variant="primary" size="small" id="enter-room-button" onClick={() => {window.open(`/editor/${props.ownerId}/${props.project.ID}`, "_blank", "noreferrer")}}>Enter room</Button>
                         </Col>
                     </Row>
                 </Container>
