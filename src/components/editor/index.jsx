@@ -2,15 +2,16 @@ import { useState } from 'react';
 import { UnControlled as CodeMirrorEditor } from "react-codemirror2";
 
 import './style.css'
-import './monokai.css'
+// import "codemirror/lib/codemirror.css";
+import "codemirror/theme/monokai.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/mode/htmlmixed/htmlmixed";
+import "codemirror/mode/css/css";
 
 function Editor (props) {
 
-// const [code, setCode] = useState("");
-
-// const handleEditorDidMount = (editor) => {
-//     setEditorRef(editor);
-//   };
+  const mode = `text/${props.fileType}`;
+  console.log("mode: ", mode);
 
   return (
     <div
@@ -30,6 +31,7 @@ function Editor (props) {
         // }}
         autoScroll
         options={{
+          mode: mode,
           theme: "monokai",
           lineWrapping: true,
           smartIndent: true,
