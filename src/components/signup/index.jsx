@@ -36,7 +36,7 @@ function SignupForm() {
         e.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
-          fetch('http://localhost:3001/api/user/signup', { 
+          fetch(`${import.meta.env.VITE_SERVER}/api/user/signup`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json', 
