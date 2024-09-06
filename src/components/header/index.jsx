@@ -33,11 +33,6 @@ function Header() {
                             <p>{username}</p>
                         </div>
                     )}
-                    {inEditor && (
-                        <div id="header-comp1">
-                            <p>Project Name</p>
-                        </div>
-                    )}
                     {isIn && (
                         <div id="header-comp2">
                             <p><a id="logout-link" onClick={handleLogout}>

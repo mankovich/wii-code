@@ -28,3 +28,7 @@
     box-shadow: 1px 1px 2px #999999, 2px 2px 2px black;
     border: none;
 }
+
+#upload-file-modal {
+    box-shadow: 1px 1px 2px black, 2px 2px 15px var(--two), 3px 3px 10px rgb(204, 0, 255), 0 0 2px rgb(204, 0, 255) inset;
+}

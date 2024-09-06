@@ -17,13 +17,12 @@
     font-size: 38px;
     font-weight: 600;
     font-family:'Courier New', Courier, monospace;
-    text-shadow: 1px 1px 2px black, 1px 1px 1px var(--button), 0 0 18px var(--two), 0 0 8px var(--four), 0 0 2px var(--neon), 2px 2px 4px black, 2px 2px 3px var(--button);
+    text-shadow: 1px 1px 2px black, 1px 1px 1px var(--button), 0 0 18px var(--two), 0 0 8px var(--two), 0 0 2px var(--neon), 2px 2px 4px black, 2px 2px 3px var(--button);
     padding-top: 10px;
     padding-left: 10px;
 }
 
 #header-comp1 {
-    
     position: fixed;
     top: 21px;
     right: 150px;
@@ -31,21 +30,21 @@
     font-size: 17px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--two);
-    text-shadow: 1px 1px 1px black, 2px 2px 1px var(--neon);
+    text-shadow: 1px 1px 1px black, 2px 2px 1px var(--mid);
 }
 
 #header-comp2 {
     position: fixed;
     right: 30px;
     top: 24px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
 }
 
 #logout-link {
     color: var(--button);
-    text-shadow: 1px 1px 1px black, 1px 1px 2px var(--button);
+    text-shadow: 1px 1px 1px black, 2px 2px 1px black, 3px 3px 1px black, 0px 0px 14px var(--two);
     cursor: pointer;
 }
 
@@ -53,5 +52,5 @@
     font-size: 20px;
     position: fixed;
     right: 21px;
-    top: 20px;
+    top: 19px;
 }
