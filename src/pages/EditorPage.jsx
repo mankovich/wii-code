@@ -32,6 +32,7 @@ function EditorPage(props) {
     const [inRoomUsers, setInRoomUsers] = useState([]);
     const [directory, setDirectory] = useState(null);
     const [currentFile, setCurrentFile] = useState(null);
+    const [currentFileType, setCurrentFileType] = useState("html");
     const [isVerified, setIsVerified] = useState(false);
     const [error, setError] = useState(null);
     const [projName, setProjName] = useState('');
@@ -150,7 +151,7 @@ function EditorPage(props) {
             awareness.current = provider.current.awareness;
             const color = RandomColor();
             awareness.current.setLocalStateField("user", {
-                name: props.username || "user"+color,
+                name: localStorage.getItem("email").split("@")[0],
                 color: color,
             });
             console.log("awareness.current: ", awareness.current);
@@ -176,10 +177,8 @@ function EditorPage(props) {
             //     })
             //   });
 
-            console.log("binding ",files.current[0]);
-            console.log(yMapRef.current.get(files.current[0].fileName).toString());
-            editorBinding.current = new CodemirrorBinding(yMapRef.current.get("index.html"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
-            // setCurrentFile(files.current[0]);
+            console.log("binding index.html");
+            setCurrentFile((files.current.find((file) => file.fileName === "index.html")));
           } catch (err) {
             alert(err + " error in initializing!");
           }
@@ -190,10 +189,26 @@ function EditorPage(props) {
   useEffect(() => {
     if (currentFile) {
       // destory binding
-      editorBinding.current.destroy();
+      editorBinding.current?.destroy();
       // create new binding
       console.log("new binding ", currentFile);
+      const fileType = currentFile.fileName.split(".").pop();
+      console.log("filetype", fileType);
+      switch (fileType) {
+        case "css":
+          setCurrentFileType("css");
+          break;
+        case "js":
+          setCurrentFileType("javascript");
+          break;
+        default:
+          setCurrentFileType("html");
+          break;
+      }      
       editorBinding.current = new CodemirrorBinding(yMapRef.current.get(currentFile.fileName), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+
+      
+
       }
     }, [currentFile]);
  
@@ -224,7 +239,8 @@ function EditorPage(props) {
               </Stack>
             </Col>
             <Col xs={7} sm={8} md={9} xl={10} className="position-absolute top-55 end-0">
-              <Editor editorRef={EditorRef} setEditorRef={setEditorRef} />
+              <Editor editorRef={EditorRef} setEditorRef={setEditorRef} fileType={currentFileType}/>
+
             </Col>
           </Row>
         </Container>
