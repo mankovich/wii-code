@@ -74,8 +74,12 @@ function ProfilePage() {
     }, []);
 
     useEffect(() => {
-        loadProjs();
-    }, []);
+        if (isVerified) loadProjs();
+    }, [isVerified]);
+
+    useEffect(() => {
+        if (error) navigate('/');
+    }, [error]);
 
     return (
         <>
