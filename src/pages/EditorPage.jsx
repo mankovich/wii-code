@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 // Bringing in the required component from 'react-router-dom' for linking between pages
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { CodemirrorBinding } from "y-codemirror";
 import * as Y from "yjs";
@@ -33,7 +33,8 @@ function EditorPage(props) {
     const [inRoomUsers, setInRoomUsers] = useState([]);
     const [directory, setDirectory] = useState(null);
     const [currentFile, setCurrentFile] = useState(null);
-    // const [filesList, setFilesList] = useState([]]);
+    const [isVerified, setIsVerified] = useState(false);
+    const [error, setError] = useState(null);
     const ydoc = useRef(new Y.Doc());
     const provider = useRef(null);
     const awareness = useRef(null);
@@ -41,16 +42,59 @@ function EditorPage(props) {
     const undoManager = useRef(null);
     const yMapRef = useRef(null);
     const files = useRef([]);
-
+    const navigate = useNavigate();
 
     const { roomId } = useParams(); 
+
+
+    async function verifyToken() {
+        const token = localStorage.getItem('token');
+
+        console.log('Token from localStorage:', token);
+        if (!token) {
+            setError('No token found');
+            return
+        }
+
+        try {
+            const response = await fetch('http://localhost:3001/api/user/profile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+            const data = await response.json();
+            console.log('Response status:', response.status);
+            if (response.ok && data) {
+                setIsVerified(true);
+            } else {
+                setError('Invalid token');
+                navigate('/');
+            }
+        } catch (err) {
+            console.error('Error verifying token:', err);
+            setError('Error verifying token');
+            navigate('/');
+        }
+    }
 
     // Yjs document that holds shared data 
     // const ydoc = new Y.Doc();
     useEffect(() =>{
+      const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId')
+      console.log('Token from localStorage:', token);
+      console.log('userId from localStorage:', userId);
+      if (!token) {
+          setError('No token found');
+          return
+      }
+
       if (!directory) {
-        axios.get(`${import.meta.env.VITE_SERVER}/api/project/1/${roomId}`,
-            {headers: { Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtva29Aa29rby5jb20iLCJpYXQiOjE3MjU1NzEwMzAsImV4cCI6MTcyNTU3ODIzMH0.7U80cRY_i6FzTRH1qNi9UxsJd3mFEE4I6uU6AvhnrAE` }}
+        axios.get(`${import.meta.env.VITE_SERVER}/api/project/${userId}/${roomId}`,
+            {headers: { Authorization: `${token}` }}
         )
         .then((res) => {
             console.log("Get directory: ", res.data[0].files);
@@ -60,6 +104,10 @@ function EditorPage(props) {
         });
       }
     }, [])
+
+    // useEffect(() => {
+    //     if (error) navigate('/');
+    // }, [error]);
 
     useEffect(() => {
       if (directory) {
@@ -123,7 +171,7 @@ function EditorPage(props) {
 
             console.log("binding ",files.current[0]);
             console.log(yMapRef.current.get(files.current[0].fileName).toString());
-            editorBinding.current = new CodemirrorBinding(yMapRef.current.get(files.current[0].fileName), EditorRef, awareness.current, {yUndoManager: undoManager.current});
+            editorBinding.current = new CodemirrorBinding(yMapRef.current.get("index.html"), EditorRef, awareness.current, {yUndoManager: undoManager.current});
             // setCurrentFile(files.current[0]);
           } catch (err) {
             alert(err + " error in initializing!");
@@ -153,7 +201,7 @@ function EditorPage(props) {
                 <div >
                   <CreateFile projectId={roomId} directory={directory} setDirectory={setDirectory}/>
                 </div>
-                <div className="ms-auto" >
+                {/* <div className="ms-auto" >
                   <CreateFolder />
                 </div> */}
                   <div className="ms-auto" >
