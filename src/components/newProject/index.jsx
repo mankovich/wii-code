@@ -46,10 +46,10 @@ function NewProjectModal() {
                 <Form.Control type="text" placeholder="New project name" autoFocus />
               </FloatingLabel>
             </Form.Group>
-            <Form.Group controlId="formFileMutltiple" className="mb-3">
+            {/* <Form.Group controlId="formFileMutltiple" className="mb-3">
               <Form.Label>Select file(s) to upload to new project</Form.Label>
               <Form.Control type="file" multiple />
-            </Form.Group>
+            </Form.Group> */}
           </Form>
         </Modal.Body>
         <Modal.Footer id="modal-footer">

@@ -11,11 +11,11 @@
 }
 
 #footer-copyright {
-    color: black;
-    font-size: 14px;
-    font-weight: 600;
+    color: var(--four);
+    font-size: 12px;
+    font-weight: 400;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 16px;
+    padding-top: 18px;
     text-align: center;
-    text-shadow: 1px 1px 1px black, 0 0 10px var(--button), 0 0 20px var(--four), 2px 2px 1px var(--button), 0 0 1px var(--neon);
+    /* text-shadow: 1px 1px 1px black, 0 0 10px var(--button), 0 0 20px var(--four), 2px 2px 1px var(--button), 0 0 1px var(--neon); */
 }

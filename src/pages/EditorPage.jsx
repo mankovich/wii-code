@@ -112,7 +112,7 @@ function EditorPage(props) {
     useEffect(() => {
       if (directory) {
         const yMap = ydoc.current.getMap("room" + roomId);
-
+        files.current = [];
 
         directory.forEach((file) => {
           const temp = new Y.Text();
@@ -205,7 +205,7 @@ function EditorPage(props) {
                   <CreateFolder />
                 </div> */}
                   <div className="ms-auto" >
-                    <UploadFile />
+                    <UploadFile projectId={roomId} directory={directory} setDirectory={setDirectory} />
                   </div>
                 </Stack>
                 <Directory files={files.current} setCurrentFile={setCurrentFile} />

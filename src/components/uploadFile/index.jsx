@@ -9,7 +9,7 @@ import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { fileToText } from '../../utils/fileToArray';
 import './style.css'
 
-function UploadFile() {
+function UploadFile({projectId, directory=[], setDirectory}) {
 
     const [show, setShow] = useState(false);
 
@@ -21,10 +21,10 @@ function UploadFile() {
         e.preventDefault();
         console.log(e);
         const content = await fileToText(fileInputRef.current.files[0]);
-        const file = {fileName: fileInputRef.current.files[0].name, content: content, project: 6}
+        const file = {fileName: fileInputRef.current.files[0].name, content: content, project: projectId }
         console.log("TOKEN: " + localStorage.getItem("token"));
         try {
-            const rereadFile = await fetch(import.meta.env.VITE_SERVER ?? "http://localhost:3001" + "/api/file", {
+            const rereadFile = await fetch(import.meta.env.VITE_SERVER + "/api/file", {
                 method: "POST",
                 body: JSON.stringify(file),
                 headers: {
@@ -40,17 +40,18 @@ function UploadFile() {
             console.log("Added file got back:");
             console.log(rereadJson);
             setDirectory([...directory, rereadJson]);
+            setShow(false)
+            location.reload()
         } catch (err) {
             alert(err);
             return
         }
-        setShow(false)
     }
 
     return (
         <>
-            <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn">
-                <FontAwesomeIcon icon={faArrowUpFromBracket} role="img" aria-label="upload file" title="upload file"/>
+            <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn" title="upload a file" >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} role="img" aria-label="upload file" />
             </Button>
 
             <Modal
