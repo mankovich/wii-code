@@ -78,10 +78,10 @@ function CreateFile({projectId, directory=[], setDirectory}) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer id="modal-footer">
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleClose} id="cancel-file-btn">
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleCreateFile} id="create-btn">
+                    <Button variant="primary" onClick={handleCreateFile} id="create-file-b">
                         Create file
                     </Button>
                 </Modal.Footer>

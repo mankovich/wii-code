@@ -75,10 +75,10 @@ function UploadFile() {
                     </Modal.Body>
                     <Modal.Footer id="modal-footer">
                         <Stack direction="horizontal" gap={5}>
-                            <Button variant="secondary" onClick={handleClose}>
+                            <Button variant="secondary" id="cancel-upload-btn" onClick={handleClose}>
                                 Cancel
                             </Button>
-                            <Button variant="primary" type='submit' id="upload-file-btn">
+                            <Button variant="primary" type='submit' id="upload-btn">
                                 Upload file
                             </Button>
                         </Stack>

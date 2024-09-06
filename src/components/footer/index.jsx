@@ -14,15 +14,15 @@ function Footer() {
             <div id="app-footer">
                 <Container>
                     <Row>
-                        <Col xs={3}></Col>
-                        <Col xs={6}>
+                        <Col xs={0}></Col>
+                        <Col xs={12}>
                             <div>
                                 <p id="footer-copyright">
                                     &copy;2024 Ortiz Mankovich Huang DeMoney. All rights reserved.
                                 </p>
                             </div>
                         </Col>
-                        <Col xs={3}>
+                        <Col xs={0}>
                         </Col>
                     </Row>
                 </Container>
