@@ -49,8 +49,8 @@ function UploadFile() {
 
     return (
         <>
-            <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn">
-                <FontAwesomeIcon icon={faArrowUpFromBracket} role="img" aria-label="upload file" title="upload file"/>
+            <Button variant="primary" size="sm" onClick={handleShow} id="upload-file-btn" title="upload a file" >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} role="img" aria-label="upload file" />
             </Button>
 
             <Modal

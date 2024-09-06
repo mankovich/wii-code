@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import NewProjectModal from '../components/newProject/index.jsx';
 import ProjectCard from '../components/projectCard/index.jsx'
 import ProjCardDiv from '../components/projCardDiv/index.jsx'
+// import loadProjs from '../utils/API.js'
 
 import '../index.css'
 import Container from 'react-bootstrap/Container'
@@ -26,7 +27,7 @@ function ProfilePage() {
         }
 
         try {
-            const response = await fetch('http://localhost:3001/api/user/profile', {
+            const response = await fetch(`${import.meta.env.VITE_SERVER}/api/user/profile`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,6 +65,9 @@ function ProfilePage() {
         })
         setProjects(projectsData.data);
     };
+
+    // const projectsData = loadProjs(userId);
+    // setProjects(projectsData.data)
 
     useEffect(() => {
         verifyToken();

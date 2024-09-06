@@ -48,8 +48,8 @@ function CreateFile({projectId, directory=[], setDirectory}) {
 
     return (
         <>
-            <Button variant="primary" size="sm" onClick={handleShow} id="create-file-btn">
-            <FontAwesomeIcon icon={faPlus} /> <FontAwesomeIcon icon={faFile} role="img" aria-label="create file" title="create file" />
+            <Button variant="primary" size="sm" onClick={handleShow} id="create-file-btn" title="create new file">
+            <FontAwesomeIcon icon={faPlus} /> <FontAwesomeIcon icon={faFile} role="img" aria-label="create new file" />
             </Button>
 
             <Modal
