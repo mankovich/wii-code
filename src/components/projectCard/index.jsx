@@ -25,7 +25,7 @@ function ProjectCard(props) {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={10}>
+                        <Col xs={8} md={9} lg={10}>
                             <ul id="card-padding">
                                 {props.project.files?.map(file => (
                                         <li key={file.ID}>
@@ -34,7 +34,7 @@ function ProjectCard(props) {
                                 )}
                             </ul>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={4} md={3} lg={2}>
                             {/* <Stack direction='horizontal' gap={2}>
                                 <Form.Control className="me-auto" placeholder="Enter room passcode" id="room-input" />
                                 <Button variant="primary" size="small" id="go-button">Enter</Button>
