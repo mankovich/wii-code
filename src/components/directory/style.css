@@ -10,3 +10,21 @@
     padding-top: 5px;
     border-bottom: solid var(--button) 1px;
 }
+
+#file-li {
+    color: white;
+    cursor: pointer;
+}
+
+#file-li:hover {
+    color: yellow;
+}
+
+#current-name {
+    color: var(--neon);
+    padding-left: 10px;
+    padding-bottom: 0;
+    margin-bottom: 5px;
+}
+
+
