@@ -4,7 +4,7 @@ import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import './style.css'
 
 function Directory (props) {
-  const [displayName, setDisplayName] = useState('')
+  const [displayName, setDisplayName] = useState('index.html')
     
   function setFile(file) {
     console.log(file);

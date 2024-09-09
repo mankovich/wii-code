@@ -16,7 +16,7 @@ import EditorsList from '../components/editorsList/index.jsx'
 import Editor from '../components/editor/index.jsx'
 import RenderBtn from '../components/renderBtn/index.jsx'
 import saveFile from '../utils/files.js'
-
+import CopyUrlButton from '../components/copyToClipBtn/index.jsx';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -211,6 +211,8 @@ function EditorPage(props) {
 
       }
     }, [currentFile]);
+
+    
  
     return (
         <>
@@ -227,6 +229,9 @@ function EditorPage(props) {
                 {/* <div className="ms-auto" >
                   <CreateFolder />
                 </div> */}
+                  <div className='ms-auto'>
+                  <CopyUrlButton/>
+                  </div>
                   <div className="ms-auto" >
                     <UploadFile projectId={roomId} directory={directory} setDirectory={setDirectory} />
                   </div>
