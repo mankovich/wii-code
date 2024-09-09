@@ -6,7 +6,7 @@
     box-shadow: 1px 1px 2px black, 1px 1px 4px var(--neon);
     padding-left: 16px;
     padding-right: 16px;
-    margin-right: 25px;
+    /* margin-right: 25px; */
 }
 
 #upload-btn {
