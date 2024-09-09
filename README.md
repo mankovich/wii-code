@@ -1,49 +1,85 @@
-# wii-code
+# Wii-Code
 
-User Story:
-As a bootcamp student, I want a platform that allows me to easily collaborate with my classmates on coding projects during classroom activities, so that we can efficiently work together in real-time, share resources, and receive instant feedback from instructors.
+Wii-Code is a real-time collaborative platform designed for bootcamp students to work together on coding projects efficiently. The platform allows students to collaborate during classroom activities, share resources while enabling an enhanced learning experience through group collaboration.
 
-Key Features to Support This User Story
-Real-Time Collaborative Code Editor:
-
-Description: A code editor that allows multiple students to write and edit code simultaneously. The editor should include syntax highlighting, real-time cursor tracking, and commenting features to facilitate communication about the code.
-Benefit: Enables students to collaborate directly on code in real time, mimicking pair programming or group coding sessions.
-
-Live Coding Challenges and Peer Review:
-
-Description: Feature live coding challenges where students can solve problems in real-time and then engage in peer review, providing feedback on each other’s solutions.
-Benefit: Promotes active learning and critical thinking by allowing students to learn from each other's approaches and coding styles.
+Visit the live platform here: [Wii-Code Platform](https://wii-code.netlify.app/)
 
 
-Live Project Management Dashboard:
+## Table of Contents
+1. [User Story](#user-story)
+2. [Key Features](#key-features)
+   - [Real-Time Collaborative Code Editor](#1-real-time-collaborative-code-editor)
+3. [How to Use](#how-to-use)
+4. [Deployed Application](#deployed-application)
+5. [Technologies Used](#technologies-used)
+6. [Contributing](#contributing)
+7. [Authors](#authors)
+8. [License](#license)
 
-Description: A project management dashboard folders/files that students can update in real-time. It can track progress on activities and projects.
-Benefit: Helps students organize their work and manage project timelines effectively, even during short classroom activities.
 
-Version History and Code Rewind:
+## User Story
 
-Description: A version control system that logs changes in real-time and allows students to revert to previous versions of their code. This feature should also include annotations to explain changes.
-Benefit: Provides a safety net for experimentation and learning, enabling students to undo mistakes and understand the evolution of their code.
+User Story
+As a bootcamp student
+I WANT to be able to collaborate on activities in real-time
+SO THAT I can more easily work with my group members
 
-Resource Sharing and Annotation:
+## Key Features
 
-Description: A centralized space for sharing resources like documents, links, and code snippets, with options to add annotations or comments on shared items.
-Benefit: Facilitates resource-sharing among students and allows them to learn from each other's research and insights.
+### 1. Real-Time Collaborative Code Editor
+- **Description**: A code editor that allows multiple students to write and edit code simultaneously. It includes syntax highlighting, real-time cursor tracking, and commenting features to facilitate communication.
+- **Benefit**: Enables students to collaborate directly on code in real time, simulating pair programming or group coding sessions, enhancing teamwork and coding productivity.
 
-Web Development Templates:
+### 2. Real-Time File Directory Structure and Rendering
+- **Description**: A feature that displays a real-time file directory structure for each project, where students can view, create, or edit files collaboratively. The platform renders the changes instantly in the browser, allowing students to see updates and live previews of their projects as they work.
+- **Benefit**: Students can navigate through project files easily and view live updates of their work in the browser, enhancing the real-time coding experience.
 
-Static Website Template: Includes HTML, CSS, and JavaScript files with a basic structure to start a static website.
-React or Vue.js Application Template: Comes with pre-installed dependencies like React or Vue.js, Webpack, and Babel configurations.
-Full-Stack Web Application Template: A template that includes both front-end and back-end setups, such as React or Angular with Express.js and a database connection (e.g., MongoDB, MySQL).
+## How to Use Wii-Code
 
-REST API Template: Pre-configured with Node.js and Express, including middleware setups like CORS, body-parsing, and basic authentication.
+1. **Check out the project**: Visit the [Wii-Code Platform](https://wii-code.netlify.app/) to start collaborating on coding projects.
 
-Time Efficiency: Users save time on setup and configuration, allowing them to focus on actual coding and development.
+2. **Create an Account**:
+   - Enter your **email address** and **password** on the sign-up page.
+   - Click the **Sign Up** button to create your account.
+   - You will be redirected to your **Profile Page** after successful account creation or logging in.
 
-Consistency Across Teams: By using standardized templates, teams can ensure consistency in their codebase and project structure, reducing onboarding time for new team members.
+3. **Profile and Adding a Project**:
+   - After logging in, you'll be taken to your **Profile Page**.
+   - From here, you can **add a project** by entering a **project title**.
+   - Once a project is created, you'll see the **project name**, a **code editor**, and a **file directory** for your project.
 
-Learning Enhancement: Beginners can learn faster by starting with well-structured templates that demonstrate best practices in project setup and code organization.
+4. **Working on Your Project**:
+   - There are buttons to **add a new file** or **upload a file** to your project.
+   - In the editor, you can also see the **In-Room Users** list, which shows who is currently in the editor room collaborating with you.
 
-Reduced Errors: Pre-configured environments reduce the likelihood of setup-related errors and compatibility issues, streamlining the development process.
+5. **Additional Features**:
+   - **Render Code**: Click this button to preview your code live in a browser.
+   - **Copy URL**: Use this button to **copy the URL** to your clipboard, so you can easily share the project link with others.
+   - **Log Out**: When you're done, you can click the **Log Out** button to end your session.
 
-Improved Collaboration: Teams can collaborate more effectively with a shared understanding of the project structure, dependencies, and configuration settings.
+## Deployed Application
+Visit the live platform here: [Wii-Code Platform](https://wii-code.netlify.app/)
+
+## Technologies Used
+- **Front-End**: HTML, CSS, JavaScript, React, FontAwesome, React-Bootstrap, yjs, y-codemirror, randomcolor, axios, Vite
+- **Back-End**: Node.js, Express
+- **Database**: Postgres 
+- **Version Control**: Git, GitHub
+- **Real-Time Collaboration**: y-webrtc, y-websocket
+
+- **client/**: Contains all the front-end React components, pages, and styles.
+- **server/**: Includes back-end logic, such as controllers, models, and routes for handling API requests and database interaction.
+- **config/**: Holds configuration files, including environment variables and database connection details.
+
+## Contributing
+Contributions are welcome! Please create a pull request with a detailed explanation of the changes you propose.
+
+## Authors
+This project was created by the following developers:
+- Anamaris Ortiz
+- Po Shin Huang
+- Joey Mankovich
+- Daniel Demoney
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
